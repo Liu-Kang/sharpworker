@@ -1,0 +1,15 @@
+{
+  "loopfunc": true,
+  "sub": true,
+  "undef": true,
+  "unused": true,
+  "node": true,
+  "esversion": 6,
+  "devel": true,
+  "globals": {
+  	"jquery": true,
+  	"$": true,
+  	"document": true,
+    "window": true
+  }
+}
