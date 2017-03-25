@@ -1,0 +1,95 @@
+@charset "utf-8";
+html, body, div, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, 
+dd, p, blockquote, pre, form, fieldset, table, th, td, input, table, textarea {
+    margin: 0;
+    padding: 0;
+}
+html{
+	width: 100%;
+    min-height: 100%;
+}
+body{
+	width: 100%;
+	min-height: 100%;
+	color: #323232;
+	font-size: 14px;
+	font-family: Arial,'Microsoft YaHei'!important;
+	overflow-x: hidden;
+}
+ol,ul{
+    list-style:none;
+}
+a{
+    text-decoration: none;
+    color: #323232;
+    -webkit-tap-highlight-color:transparent;
+}
+.z9{z-index: 9!important;}
+.z99{z-index: 99!important;}
+.z999{z-index: 999!important;}
+.opa{opacity: 0.7 !important;}
+.bt1{border-top: 1px solid #e5e5e5 !important;}
+.bb1{border-bottom: 1px solid #e5e5e5 !important;}
+.tac{text-align: center !important;}
+.tal{text-align: left !important;}
+.tar{text-align: right !important;}
+.por{position: relative !important;}
+.center{margin: 0 auto;}
+.mt10{margin-top: 10px !important;}
+.mt20{margin-top: 20px !important;}
+.mt30{margin-top: 30px !important;}
+.mt40{margin-top: 40px !important;}
+.ml10{margin-left: 10px !important;}
+.ml20{margin-left: 20px !important;}
+.ml30{margin-left: 30px !important;}
+.ml40{margin-left: 40px !important;}
+.mr10{margin-right: 10px !important;}
+.mr20{margin-right: 20px !important;}
+.mr30{margin-right: 30px !important;}
+.mr40{margin-right: 40px !important;}
+.mb10{margin-bottom: 10px !important;}
+.mb20{margin-bottom: 20px !important;}
+.mb30{margin-bottom: 30px !important;}
+.mb40{margin-bottom: 40px !important;}
+.ofh{overflow: hidden !important;}
+.cfff{color: #fff !important;}
+.c999{color: #999 !important;}
+.fl{float: left !important;}
+.fr{float: right !important;}
+.clearfix {
+    zoom: 1;
+}
+.clearfix:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.rowflex{
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.flex1{
+	-webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+.ellipsis{
+    width: 100%;
+    white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+
+.container{
+    width: 100%;
+    min-height: 100%;
+}

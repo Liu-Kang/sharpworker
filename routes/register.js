@@ -1,9 +1,9 @@
 module.exports = function(app){
-	app.get('/', registerController);
+	app.get('/register', registerController);
 };
 
 function registerController(req,res,next){
-	res.render('index',{
-		title:'首页'
+	res.render('register',{
+		title:'注册'
 	});
 }
