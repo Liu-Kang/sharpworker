@@ -28,8 +28,8 @@ app.use(WebpackDevMiddleware(compiler, {
 }));
 // app.use(WebpackHotMiddleware(compiler));
 
-var member = require('./server/routes/member');
-app.use(member);
+var user = require('./server/routes/user');
+app.use(user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

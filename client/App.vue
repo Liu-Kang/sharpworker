@@ -1,37 +1,25 @@
 <template>
   <div id="app">
+    <chat v-if="isLogin"></chat>
+    <login v-else></login>
   </div>
 </template>
 
 <script>
-export default {
-  components:{
-    Login,
-    ChatHeader,
-    MemberList,
-    ChatList,
-    ChatSend
-  },
-  data(){
-    return {
-      contentStyle:{
-        height:'0px'
+  import chat from './components/chat.vue'
+  import login from './components/login.vue'
+
+  export default {
+    data() {
+      return {
+        isLogin: false
       }
+    },
+    components:{
+      chat,
+      login
     }
-  },
-  mounted(){
-    this.contentStyle.height = `${document.documentElement.clientHeight - 50}px`;
-  },
-  computed:{
-    ...mapState({
-      user:state => state.user.user,
-      doLogin:state => state.user.doLogin
-    }),
-    ...mapGetters([
-      'isLogin'
-    ])
   }
-}
 </script>
 
 <style lang="less">
@@ -39,16 +27,7 @@ export default {
   #app {
     width: 100%;
     height: 100%;
-    .chat-body{
-      padding-top: 50px;
-      .clearfix();
-    }
-    .chat-main{
-      width: 80%;
-      height: 100%;
-      float: right;
-      color: #444;
-      position: relative;
-    }
+    background: url(./assets/bg.jpg) no-repeat 50%;
+    background-size: cover;
   }
 </style>
