@@ -1,23 +1,16 @@
 <template>
   <div id="app">
-    <chat v-if="isLogin"></chat>
-    <login v-else></login>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
   import chat from './components/chat.vue'
-  import login from './components/login.vue'
 
   export default {
     data() {
       return {
-        isLogin: false
       }
-    },
-    components:{
-      chat,
-      login
     }
   }
 </script>

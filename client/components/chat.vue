@@ -10,10 +10,20 @@
 	import rightbox from './rightbox.vue'
 
 	export default {
-	  components:{
-	    leftbox,
-	    rightbox
-	  }
+		data() {
+			return {
+				login: false
+			}
+		},
+		created() {
+			if (!this.login) {
+				this.$router.push({name: 'login'})
+			}
+		},
+		components:{
+	    	leftbox,
+	    	rightbox
+	  	}
 	}
 </script>
 
