@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <transition name="slidein">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -8,7 +10,7 @@
   import chat from './components/chat.vue'
 
   export default {
-    data() {
+    data () {
       return {
       }
     }
@@ -22,5 +24,12 @@
     height: 100%;
     background: url(./assets/bg.jpg) no-repeat 50%;
     background-size: cover;
+    .slidein-enter{
+      transform: translateX(200px);
+      opacity: 0;
+    }
+    .slidein-enter-active{
+      transition: all .8s cubic-bezier(.18, .60, .55, .80);
+    }
   }
 </style>
