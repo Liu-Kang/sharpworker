@@ -12,12 +12,14 @@
 	export default {
 		data() {
 			return {
-				login: false
+				login: true
 			}
 		},
-		created() {
-			if (!this.login) {
-				this.$router.push({name: 'login'})
+		watch: {
+			login() {
+				if (!this.login) {
+					this.$router.push({name: 'login'})
+				}
 			}
 		},
 		components:{

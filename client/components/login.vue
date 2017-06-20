@@ -2,8 +2,8 @@
 	<div class="login-container">
 		<div class="login-box">
 			<h1 class="login-title">Login</h1>
-			<input type="text" placeholder="用户名">
-			<input type="password" placeholder="密码">
+			<input type="text" v-model.trim="username" placeholder="用户名">
+			<input type="password" v-model.trim="password" placeholder="密码">
                   <el-button type="primary" class="do-login" @click="doLogin">登录</el-button>
                   <router-link class="go-regist" :to="{name: 'regist'}">注册</router-link>
 		</div>
@@ -11,9 +11,47 @@
 </template>
 
 <script>
+      import ChatModel from '../model'
+
+      const model = new ChatModel()
 	export default {
+            data() {
+                  return {
+                        username: '',
+                        password: ''
+                  }
+            },
 		methods: {
                   doLogin() {
+                        let self = this
+
+                        if(!self.username){
+                              self.$message({
+                                    message: '请输入用户名',
+                                    type: 'warning'
+                              })
+                              return false
+                        }
+                        if(!self.password){
+                              self.$message({
+                                    message: '请输入密码',
+                                    type: 'warning'
+                              })
+                              return false
+                        }
+
+                        let params = {
+                              username: self.username,
+                              password: self.password
+                        }
+                        model.doLogin(params).then(data => {
+                              if (data.code === 0) {
+                                    self.$router.push({name: 'chat'})
+                                    self.$store.user.user.name = data.user.username
+                              } else {
+                                    self.$message.error(data.msg)
+                              }
+                        })
                   }
             }
 	}

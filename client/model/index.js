@@ -6,4 +6,11 @@ export default class ChatModel extends Fetch {
 			params
 		})
 	}
+
+	doLogin(params) {
+		return this.send({
+			url: '/api/login',
+			params
+		})
+	}
 }

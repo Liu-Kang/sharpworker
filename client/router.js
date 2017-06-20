@@ -7,7 +7,7 @@ import chat from './components/chat.vue'
 Vue.use(VueRouter)
 
 const routes = [
-	{path: '/', name: 'chat', component: chat},
+	{path: '/chat', name: 'chat', component: chat},
 	{path: '/login', name: 'login', component: login},
 	{path: '/regist', name: 'regist', component: regist}
 ]

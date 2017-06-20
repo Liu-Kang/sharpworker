@@ -4,7 +4,6 @@ const User = require('../model/user');
 const crypto = require('crypto');
 
 router.post('/api/regist',registSubmitController);
-module.exports = router;
 
 function registSubmitController(req, res, next){
 	let data = req.body;
@@ -41,3 +40,5 @@ function registSubmitController(req, res, next){
 		});
 	});
 }
+
+module.exports = router;

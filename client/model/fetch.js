@@ -8,7 +8,7 @@ export default class Fetch {
 			'Content-Type': 'application/json',
 			'X-Requested-With': 'XMLHttpRequest'
 		}
-
+		
 		let options = {
 			method: 'POST' || obj.method.toUppercase(),
 			headers: defaultHeaders

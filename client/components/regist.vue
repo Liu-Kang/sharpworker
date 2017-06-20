@@ -18,7 +18,7 @@
 <script>
       import ChatModel from '../model'
 
-      const model = new ChatModel
+      const model = new ChatModel()
 
 	export default {
 		data () {
@@ -78,7 +78,15 @@
                               password: this.password,
                               sex: this.sex
                         }
-                        model.doRegist(params)
+                        let self = this
+                        model.doRegist(params).then(data => {
+                              if (data.code === 0) {
+                                    self.$router.push({name: 'login'})
+                                    // self.$store.user.user.name = params.name
+                              } else {
+                                    self.$message.error(data.msg)
+                              }
+                        })
                   }
             }
 	}
