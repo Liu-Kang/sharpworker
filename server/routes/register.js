@@ -1,45 +1,32 @@
+const express = require('express');
+const router = express.Router();
 const User = require('../model/user');
 const crypto = require('crypto');
 
-module.exports = function(app){
-	app.get('/register', registerController);
-	app.post('/register/submit', registerSubmitController);
-};
+router.post('/api/regist',registSubmitController);
+module.exports = router;
 
-function registerController(req,res){
-	res.render('register',{
-		title:'注册'
-	});
-}
-
-function registerSubmitController(req,res){
+function registSubmitController(req, res, next){
 	let data = req.body;
-
+	
 	if(!data.username){
 		return res.json({
-			errorCode:-1,
-			errorMsg:'请填写用户名'
+			code: -1,
+			msg: '请填写用户名'
 		});
 	}
 
 	if(!data.password){
 		return res.json({
-			errorCode:-2,
-			errorMsg:'请填写密码'
-		});
-	}
-
-	if(!data.email){
-		return res.json({
-			errorCode:-4,
-			errorMsg:'请填写邮箱'
+			code: -2,
+			msg: '请填写密码'
 		});
 	}
 
 	if(!data.sex){
 		return res.json({
-			errorCode:-5,
-			errorMsg:'请选择性别'
+			code: -3,
+			msg: '请选择性别'
 		});
 	}
 
@@ -47,11 +34,10 @@ function registerSubmitController(req,res){
 	let password_md5 = md5.update(data.password).digest('hex');
 	data.password = password_md5;
 
-	new User().createUser(data,function(result){
-		console.log(result);
-		return res.json({
-			errorCode:0,
-			errorMsg:'注册成功'
+	new User().createUser(data).then(result => {
+		res.json({
+			code: 0,
+			msg: '注册成功'
 		});
 	});
 }

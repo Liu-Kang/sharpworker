@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const url = 'mongodb://192.168.1.102:27017/sharpworker';
+const url = 'mongodb://localhost:27017/sharpworker';
 
 /**
  * 连接

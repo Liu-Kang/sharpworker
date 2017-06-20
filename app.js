@@ -28,7 +28,9 @@ app.use(WebpackDevMiddleware(compiler, {
 }));
 // app.use(WebpackHotMiddleware(compiler));
 
+var regist = require('./server/routes/register');
 var user = require('./server/routes/user');
+app.use(regist);
 app.use(user);
 
 // catch 404 and forward to error handler

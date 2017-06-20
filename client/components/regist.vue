@@ -2,24 +2,83 @@
 	<div class="regist-container">
 		<div class="regist-box">
 			<h1 class="regist-title">Regist</h1>
-			<input type="text" placeholder="用户名">
-			<input type="password" placeholder="密码">
-                  <input type="password" placeholder="再次输入密码">
+			<input type="text" v-model.trim="username" placeholder="用户名">
+			<input type="password" v-model.trim="password" placeholder="密码">
+                  <input type="password" v-model.trim="repassword" placeholder="再次输入密码">
                   <div class="sex-pick">
-                        <el-radio class="radio" v-model="radio" label="1">男</el-radio>
-                        <el-radio class="radio" v-model="radio" label="0">女</el-radio>
+                        <el-radio class="radio" v-model="sex" label="1">男</el-radio>
+                        <el-radio class="radio" v-model="sex" label="0">女</el-radio>
                   </div>
-                  <el-button type="primary" class="do-regist">注册</el-button>
+                  <el-button type="primary" class="do-regist" @click="doRegist">注册</el-button>
                   <router-link class="go-login" :to="{name: 'login'}">登录</router-link>
 		</div>
 	</div>
 </template>
 
 <script>
+      import ChatModel from '../model'
+
+      const model = new ChatModel
+
 	export default {
 		data () {
                   return {
-                        radio: '1'
+                        username: '',
+                        password: '',
+                        repassword: '',
+                        sex: '1'
+                  }
+            },
+            methods: {
+                  doRegist() {
+                        if(!this.username){
+                              this.$message({
+                                    message: '请输入用户名',
+                                    type: 'warning'
+                              })
+                              return false
+                        }
+                        if(!this.password){
+                              this.$message({
+                                    message: '请输入密码',
+                                    type: 'warning'
+                              })
+                              return false
+                        }
+                        if(this.password.length < 6){
+                              this.$message({
+                                    message: '密码长度至少6位',
+                                    type: 'warning'
+                              })
+                              return false
+                        }
+                        if(!this.repassword){
+                              this.$message({
+                                    message: '请输入确认密码',
+                                    type: 'warning'
+                              })
+                              return false
+                        }
+                        if(this.repassword !== this.password){
+                              this.$message({
+                                    message: '两次密码输入不一致',
+                                    type: 'warning'
+                              })
+                              return false
+                        }
+                        if(!this.sex){
+                              this.$message({
+                                    message: '请选择性别',
+                                    type: 'warning'
+                              })
+                              return false
+                        }
+                        let params = {
+                              username: this.username,
+                              password: this.password,
+                              sex: this.sex
+                        }
+                        model.doRegist(params)
                   }
             }
 	}
