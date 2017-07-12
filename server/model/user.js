@@ -33,4 +33,4 @@ class User {
 	}
 }
 
-module.exports = User;
+module.exports = new User();

@@ -33,7 +33,7 @@ function registSubmitController(req, res, next){
 	let password_md5 = md5.update(data.password).digest('hex');
 	data.password = password_md5;
 
-	new User().createUser(data).then(result => {
+	User.createUser(data).then(result => {
 		res.json({
 			code: 0,
 			msg: '注册成功'

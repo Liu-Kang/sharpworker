@@ -7,9 +7,9 @@ import chat from './components/chat.vue'
 Vue.use(VueRouter)
 
 const routes = [
-	{path: '/chat', name: 'chat', component: chat},
-	{path: '/login', name: 'login', component: login},
-	{path: '/regist', name: 'regist', component: regist}
+	{ path: '/chat', name: 'chat', component: chat },
+	{ path: '/login', name: 'login', component: login },
+	{ path: '/regist', name: 'regist', component: regist }
 ]
 
 export default new VueRouter({

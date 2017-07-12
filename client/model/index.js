@@ -1,5 +1,13 @@
 import Fetch from './fetch'
-export default class ChatModel extends Fetch {
+
+class ChatModel extends Fetch {
+	getIndex() {
+		return this.send({
+			url: '/getIndex',
+			method: 'GET'
+		})
+	}
+
 	doRegist(params) {
 		return this.send({
 			url: '/api/regist',
@@ -14,3 +22,5 @@ export default class ChatModel extends Fetch {
 		})
 	}
 }
+
+export default new ChatModel()

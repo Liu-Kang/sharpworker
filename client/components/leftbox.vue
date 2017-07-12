@@ -5,7 +5,7 @@
 	            <img src="../assets/boy.jpg">
 	        </div>
 	        <div class="info">
-	            <h3 class="nickname">LK</h3>
+	            <h3 class="nickname">{{user.username}}</h3>
 	        </div>
 	    </div>
 	    <div class="search-bar">
@@ -39,12 +39,18 @@
 <script>
 	import roomlist from './roomlist.vue'
 	import privatelist from './privatelist.vue'
+	import { mapGetters } from 'vuex'
 
 	export default {
 		data() {
 			return {
 				currentTab: 'group'
 			}
+		},
+		computed: {
+			...mapGetters([
+				'user'
+			])
 		},
 		components: {
 			roomlist,

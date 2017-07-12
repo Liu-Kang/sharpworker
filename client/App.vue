@@ -8,11 +8,25 @@
 
 <script>
   import chat from './components/chat.vue'
+  import ChatModel from './model'
 
   export default {
-    data () {
+    data() {
       return {
       }
+    },
+    created() {
+      ChatModel.getIndex().then(data => {
+        if (data.code === 0) {
+            if (Object.keys(data.user).length) {
+              this.$router.push({name: 'chat'})
+            } else {
+              this.$router.push({name: 'login'})
+            }
+        } else {
+            this.$message.error(data.msg)
+        }
+      })
     }
   }
 </script>

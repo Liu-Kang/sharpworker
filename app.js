@@ -28,9 +28,11 @@ app.use(WebpackDevMiddleware(compiler, {
 }));
 // app.use(WebpackHotMiddleware(compiler));
 
+var index = require('./server/routes/index');
 var login = require('./server/routes/login');
 var regist = require('./server/routes/register');
 var user = require('./server/routes/user');
+app.use(index);
 app.use(login);
 app.use(regist);
 app.use(user);

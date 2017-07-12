@@ -12,8 +12,7 @@
 
 <script>
     import ChatModel from '../model'
-
-    const model = new ChatModel()
+    import { mapActions } from 'vuex'
 	export default {
         data() {
             return {
@@ -22,18 +21,19 @@
             }
         },
 		methods: {
+            ...mapActions([
+                'setUser'
+            ]),
             doLogin() {
-                let self = this
-
-                if(!self.username){
-                    self.$message({
+                if(!this.username){
+                    this.$message({
                         message: '请输入用户名',
                         type: 'warning'
                     })
                     return false
                 }
-                if(!self.password){
-                    self.$message({
+                if(!this.password){
+                    this.$message({
                         message: '请输入密码',
                         type: 'warning'
                     })
@@ -41,15 +41,15 @@
                 }
 
                 let params = {
-                    username: self.username,
-                    password: self.password
+                    username: this.username,
+                    password: this.password
                 }
-                model.doLogin(params).then(data => {
+                ChatModel.doLogin(params).then(data => {
                     if (data.code === 0) {
-                        self.$router.push({name: 'chat'})
-                        self.$store.user.user.name = data.user.username
+                        this.setUser(data.user)
+                        this.$router.push({name: 'chat'})
                     } else {
-                        self.$message.error(data.msg)
+                        this.$message.error(data.msg)
                     }
                 })
             }
