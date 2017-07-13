@@ -8,6 +8,7 @@
 
 <script>
   import ChatModel from './model'
+  import { mapActions } from 'vuex'
 
   export default {
     data() {
@@ -17,7 +18,8 @@
     created() {
       ChatModel.getIndex().then(data => {
         if (data.code === 0) {
-            if (Object.keys(data.user).length) {
+            if (data.user) {
+              this.setUser(data.user)
               this.$router.push({name: 'chat'})
             } else {
               this.$router.push({name: 'login'})
@@ -26,6 +28,11 @@
             this.$message.error(data.msg)
         }
       })
+    },
+    methods: {
+      ...mapActions([
+        'setUser'
+      ]),
     }
   }
 </script>

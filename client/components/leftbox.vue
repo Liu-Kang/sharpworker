@@ -2,10 +2,10 @@
 	<div class="left-box">
 		<div class="header">
 	        <div class="avatar">
-	            <img src="../assets/boy.jpg">
+	            <img :src="myAvatar">
 	        </div>
 	        <div class="info">
-	            <h3 class="nickname">{{'LiuKang'}}</h3>
+	            <h3 class="nickname">{{user.username}}</h3>
 	        </div>
 	    </div>
 	    <div class="search-bar">
@@ -50,7 +50,10 @@
 		computed: {
 			...mapGetters([
 				'user'
-			])
+			]),
+			myAvatar() {
+				return this.user.sex ? '../assets/boy.jpg' : '../assets/girl.jpg'
+			}
 		},
 		components: {
 			roomlist,
@@ -72,7 +75,7 @@
     		position: relative;
 	    }
 	    .avatar{
-			display: table-cell;
+				display: table-cell;
 		    vertical-align: middle;
 		    word-wrap: break-word;
 		    word-break: break-all;

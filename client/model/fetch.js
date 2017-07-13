@@ -16,6 +16,7 @@ export default class Fetch {
 		
 		let options = {
 			method: reqMethod,
+			credentials: 'include', // fetch竟然默认是不带cookie的...
 			headers: defaultHeaders
 		}
 

@@ -15,9 +15,9 @@
 			}
 		},
 		components:{
-	    	leftbox,
-	    	rightbox
-	  	}
+    	leftbox,
+    	rightbox
+  	}
 	}
 </script>
 

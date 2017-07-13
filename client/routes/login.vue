@@ -12,7 +12,7 @@
 
 <script>
     import ChatModel from '../model'
-    import { mapActions } from 'vuex'
+    
 	export default {
         data() {
             return {
@@ -29,9 +29,6 @@
             }
         },
 		methods: {
-            ...mapActions([
-                'setUser'
-            ]),
             doLogin() {
                 if(!this.username){
                     this.$message({
@@ -53,9 +50,7 @@
                     password: this.password
                 }
                 ChatModel.doLogin(params).then(data => {
-                    console.log('============\n', document.cookie)
                     if (data.code === 0) {
-                        this.setUser(data.user)
                         this.$router.push({name: 'chat'})
                     } else {
                         this.$message.error(data.msg)

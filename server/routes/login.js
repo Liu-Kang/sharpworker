@@ -28,7 +28,10 @@ function loginController(req, res, next) {
 				msg: '密码错误'
 			}
 		} else {
-			res.cookie('uid', doc._id, {
+			res.cookie('user', {
+				userid: doc._id,
+				username: doc.username
+			}, {
 				maxAge: 1000 * 60 * 60 * 24,
 				httpOnly: false
 			});
