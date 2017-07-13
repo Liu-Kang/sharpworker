@@ -4,7 +4,7 @@
 			<h1 class="login-title">Login</h1>
 			<input type="text" v-model.trim="username" placeholder="用户名">
 			<input type="password" v-model.trim="password" placeholder="密码">
-            <el-button type="primary" class="do-login" @click="doLogin">登录</el-button>
+            <el-button type="primary" class="do-login" @click="doLogin" @keyup.13="doLogin">登录</el-button>
             <router-link class="go-regist" :to="{name: 'regist'}">注册</router-link>
 		</div>
 	</div>
@@ -18,6 +18,14 @@
             return {
                 username: '',
                 password: ''
+            }
+        },
+        mounted() {
+            const self = this
+            document.onkeydown = function(event) {
+                if (event.which === 13) {
+                    self.doLogin()   
+                }
             }
         },
 		methods: {
@@ -45,6 +53,7 @@
                     password: this.password
                 }
                 ChatModel.doLogin(params).then(data => {
+                    console.log('============\n', document.cookie)
                     if (data.code === 0) {
                         this.setUser(data.user)
                         this.$router.push({name: 'chat'})

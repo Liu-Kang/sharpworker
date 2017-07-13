@@ -27,6 +27,14 @@
                 sex: '1'
             }
         },
+        mounted() {
+            const self = this
+            document.onkeyup = function(event) {
+                if (event.which === 13) {
+                    self.doRegist()
+                }
+            }
+        },
         methods: {
             doRegist() {
                 if(!this.username){

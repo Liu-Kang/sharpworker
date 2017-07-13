@@ -21,9 +21,9 @@ export default class Fetch {
 
 		if (reqMethod === 'GET') {
 			reqUrl = urlUtils.format({
-		    pathname: obj.url,
-		    query: obj.params
-		  })
+				pathname: obj.url,
+				query: obj.params
+			})
 		} else {
 			options.body = JSON.stringify(obj.params)
 		}

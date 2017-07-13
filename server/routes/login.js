@@ -14,8 +14,7 @@ function loginController(req, res, next) {
 	User.getUserByName(data.username).then(doc => {
 		let cb = {
 			code: 0,
-			msg: '登录成功',
-			user: {}
+			msg: '登录成功'
 		};
 
 		if (!doc) {
@@ -29,20 +28,11 @@ function loginController(req, res, next) {
 				msg: '密码错误'
 			}
 		} else {
-			cb.user = {
-				username: doc.username,
-				id: doc._id,
-				sex: doc.sex,
-			}
+			res.cookie('uid', doc._id, {
+				maxAge: 1000 * 60 * 60 * 24,
+				httpOnly: false
+			});
 		}
-
-		res.cookie('user', {
-			id: doc._id,
-			username: doc.username
-		}, {
-			maxAge: 1000 * 60 * 60 * 24,
-			httpOnly: false
-		});
 		res.json(cb);
 	});
 }

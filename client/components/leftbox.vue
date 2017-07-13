@@ -5,7 +5,7 @@
 	            <img src="../assets/boy.jpg">
 	        </div>
 	        <div class="info">
-	            <h3 class="nickname">{{user.username}}</h3>
+	            <h3 class="nickname">{{'LiuKang'}}</h3>
 	        </div>
 	    </div>
 	    <div class="search-bar">

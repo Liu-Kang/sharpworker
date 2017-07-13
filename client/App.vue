@@ -7,7 +7,6 @@
 </template>
 
 <script>
-  import chat from './components/chat.vue'
   import ChatModel from './model'
 
   export default {

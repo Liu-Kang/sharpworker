@@ -6,20 +6,12 @@
 </template>
 
 <script>
-	import leftbox from './leftbox.vue'
-	import rightbox from './rightbox.vue'
+	import leftbox from '../components/leftbox.vue'
+	import rightbox from '../components/rightbox.vue'
 
 	export default {
 		data() {
 			return {
-				login: true
-			}
-		},
-		watch: {
-			login() {
-				if (!this.login) {
-					this.$router.push({name: 'login'})
-				}
 			}
 		},
 		components:{

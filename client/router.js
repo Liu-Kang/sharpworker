@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import login from './components/login.vue'
-import regist from './components/regist.vue'
-import chat from './components/chat.vue'
+import login from './routes/login.vue'
+import regist from './routes/regist.vue'
+import chat from './routes/chat.vue'
 
 Vue.use(VueRouter)
 

@@ -6,11 +6,9 @@ router.get('/getIndex', indexController);
 
 function indexController(req, res, next) {
   let user = {};
-
-  if(req.cookies.user){
+  if(req.cookies.uid && req.cookies.uid.length > 0){
     user = {
-      id: req.cookies.user.userid,
-      username: req.cookies.user.username
+      id: req.cookies.user.userid
     };
   }
   
