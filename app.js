@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 //webpack
 var webpack = require('webpack');
 var WebpackDevMiddleware = require('webpack-dev-middleware');
-// var WebpackHotMiddleware = require('webpack-hot-middleware');
+var WebpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('./webpack.config');
 var compiler = webpack(config);
 
@@ -26,7 +26,7 @@ app.use(WebpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
   stats: { colors: true }
 }));
-// app.use(WebpackHotMiddleware(compiler));
+app.use(WebpackHotMiddleware(compiler));
 
 var index = require('./server/routes/index');
 var login = require('./server/routes/login');
@@ -67,6 +67,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

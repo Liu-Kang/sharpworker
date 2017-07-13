@@ -3,17 +3,17 @@ var webpack = require('webpack')
 
 module.exports = {
   entry: [
-    // 'webpack/hot/dev-server',
-    // 'webpack-hot-middleware/client',
+    'webpack/hot/dev-server',
+    'webpack-hot-middleware/client',
     './client/main.js'
   ],
   output: {
-    path: path.resolve(__dirname, './client'),
-    publicPath: '/dist/',
+    path: '/',
+    publicPath: 'http://localhost:3000/client/dist/',
     filename: 'build.js'
   },
   plugins: [
-    // new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
     rules: [
