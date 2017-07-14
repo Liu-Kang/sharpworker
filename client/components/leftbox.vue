@@ -49,7 +49,7 @@
             </a>
         </div>
     </div>
-    <div class="scroll-box">
+    <div class="scroll-box" v-bar="scrollbar">
     	<roomlist></roomlist>
     </div>
 	</div>
@@ -64,7 +64,11 @@
 		data() {
 			return {
 				currentTab: 'group',
-				showMenu: false
+				showMenu: false,
+				scrollbar: {
+			    preventParentScroll: true,
+			    scrollThrottle: 30
+			  }
 			}
 		},
 		computed: {
@@ -83,8 +87,12 @@
 			const self = this
 			const menuBox = document.querySelector('.menu-box')
 			const opt = document.querySelector('#opt')
+			const scrollBox = document.querySelector('.scroll-box')
+
 			menuBox.style.left = `${opt.offsetLeft - 180 + opt.clientWidth}px`
 			menuBox.style.top = `${opt.offsetTop + opt.clientHeight}px`
+			scrollBox.style.height = `${scrollBox.clientHeight}px`
+
 			document.body.onclick = function() {
 				self.showMenu = false
 			}
@@ -105,6 +113,10 @@
     height: 100%;
     float: left;
     background-color: #2e3238;
+    .columnflex();
+    .scroll-box{
+    	.flex1();
+    }
     .header{
     	padding: 18px;
   		position: relative;
