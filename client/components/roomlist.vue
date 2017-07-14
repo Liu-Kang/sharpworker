@@ -1,7 +1,7 @@
 <template>
 	<div class="chat-list">
 		<div class="chat-scope">
-        	<div v-for="room in rooms" class="chat-item slide-left ng-scope">
+        	<div v-for="room in rooms" class="chat-item">
         		<div class="ext">
 	                <p class="ext-time">{{room.time}}</p>
 	            </div>
@@ -27,6 +27,81 @@
 						name: 'SaySomeThing',
 						lastmsg: 'Tony:凑个单',
 						time: '17:04'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
+					},
+					{
+						name: '相亲相爱',
+						lastmsg: 'Liuk:什么时候回去',
+						time: '17:20'
 					},
 					{
 						name: '相亲相爱',
