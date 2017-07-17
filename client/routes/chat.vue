@@ -12,6 +12,7 @@
 	import leftbox from '../components/leftbox.vue'
 	import rightbox from '../components/rightbox.vue'
   import createroom from '../components/createroom.vue'
+  import ChatModel from '../model/chat'
 
 	export default {
 		data() {
@@ -22,7 +23,14 @@
     	leftbox,
     	rightbox,
       createroom
-  	}
+  	},
+    created() {
+      ChatModel.getRoomlist().then(data => {
+        if (data.code === 0) {
+          
+        }
+      })
+    }
 	}
 </script>
 

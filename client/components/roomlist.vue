@@ -7,7 +7,7 @@
 	            </div>
 	            <div class="info">
 	                <h3 class="nickname">
-	                    <span>{{room.name}}</span>
+	                    <span>{{room.roomname}}</span>
 	                </h3>
 	                <p class="last-msg">
 	                    <span>{{room.lastmsg}}</span>
@@ -19,22 +19,16 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	export default {
 		data() {
 			return {
-				rooms: [
-					{
-						name: 'SaySomeThing',
-						lastmsg: 'Tony:凑个单',
-						time: '17:04'
-					},
-					{
-						name: '相亲相爱',
-						lastmsg: 'Liuk:什么时候回去',
-						time: '17:20'
-					}
-				]
 			}
+		},
+		computed: {
+			...mapGetters([
+				'rooms'
+			])
 		}
 	}
 </script>

@@ -10,6 +10,9 @@ const RoomSchema = new Schema({
 const RoomModel = mongoose.model('room', RoomSchema);
 
 class Chat {
+  /**
+   * 创建房间
+   */
   createChatRoom(data) {
     return new Promise((resolved, rejected) => {
       const roomEntity = new RoomModel(data);
@@ -18,6 +21,20 @@ class Chat {
           throw err
         }
         resolved(result);
+      });
+    });
+  }
+
+  /**
+   * 获取全部房间
+   */
+  getAllRooms() {
+    return new Promise((resolved, rejected) => {
+      RoomModel.find(function(err, doc){
+        if (err) {
+          throw err
+        }
+        resolved(doc);
       });
     });
   }

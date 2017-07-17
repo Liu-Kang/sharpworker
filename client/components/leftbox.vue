@@ -30,24 +30,24 @@
         <input class="search-input" placeholder="搜索">
     </div>
     <div class="tab">
-        <div class="tab-item">
-            <a class="group" title="聊天室" href="javascript:;">
-            	<i v-if="currentTab === 'group'" class="group-icon selected"></i>
-							<i v-else class="group-icon"></i>
-            </a>
-        </div>
-        <div class="tab-item">
-        	<a class="private" title="私聊" href="javascript:;">
-            	<i v-if="currentTab === 'private'" class="private-icon selected"></i>
-            	<i v-else class="private-icon"></i>
-            </a>
-        </div>
-        <div class="tab-item">
-            <a class="link" title="通讯录" href="javascript:;">
-            	<i v-if="currentTab === 'link'" class="link-icon selected"></i>
-            	<i v-else class="link-icon"></i>
-            </a>
-        </div>
+      <div class="tab-item">
+        <a class="group" title="聊天室" href="javascript:;">
+        	<i v-if="currentTab === 'group'" class="group-icon selected"></i>
+					<i v-else class="group-icon"></i>
+        </a>
+      </div>
+      <div class="tab-item">
+      	<a class="private" title="私聊" href="javascript:;">
+        	<i v-if="currentTab === 'private'" class="private-icon selected"></i>
+        	<i v-else class="private-icon"></i>
+        </a>
+      </div>
+      <div class="tab-item">
+          <a class="link" title="通讯录" href="javascript:;">
+          	<i v-if="currentTab === 'link'" class="link-icon selected"></i>
+          	<i v-else class="link-icon"></i>
+          </a>
+      </div>
     </div>
     <div class="scroll-box" v-bar="scrollbar">
     	<roomlist></roomlist>
