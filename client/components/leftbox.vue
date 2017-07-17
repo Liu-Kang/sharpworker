@@ -13,12 +13,12 @@
       <div class="menu-box" v-show="showMenu">
 				<ul class="menu-list">
 			    <li>
-						<a href="javascript:;" title="创建房间">
+						<a href="javascript:;" title="创建房间" @click="createRoom">
 							<i class="menu-create-room"></i>创建房间
 						</a>
 			    </li>
 			    <li>
-						<a href="javascript:;" title="退出">
+						<a href="javascript:;" title="退出" @click="logout">
 							<i class="menu-logout"></i>退出
 						</a>
 					</li>
@@ -59,6 +59,7 @@
 	import roomlist from './roomlist.vue'
 	import privatelist from './privatelist.vue'
 	import { mapGetters } from 'vuex'
+	import ChatModel from '../model'
 
 	export default {
 		data() {
@@ -98,8 +99,38 @@
 			}
 		},
 		methods: {
+			/**
+			 * 隐藏、显示功能列表
+			 * @return {[type]} [description]
+			 */
 			toggleOperateMenu() {
 				this.showMenu = !this.showMenu
+			},
+			/**
+			 * 退出登录
+			 * @return {[type]} [description]
+			 */
+			logout() {
+				this.$confirm('退出登录后将不保留聊天信息，是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+        	return ChatModel.doLogout()
+        }).then(data => {
+					if (data.code === 0) {
+						this.$router.go(0)
+					} else {
+						this.$message.error(data.msg)
+					}
+				})
+			},
+			/**
+			 * 创建房间
+			 * @return {[type]} [description]
+			 */
+			createRoom() {
+				console.log('create')
 			}
 		}
 	}

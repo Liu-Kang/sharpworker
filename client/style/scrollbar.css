@@ -23,18 +23,13 @@
   display: block;
 }
 .vb.vb-scrolling-phantom > .vb-dragger > .vb-dragger-styler {
-  background-color: rgba(75, 80, 90,.3);
+  background-color: rgba(8, 10, 16,.4);
 }
 .vb > .vb-dragger:hover > .vb-dragger-styler {
-  background-color: rgba(75, 80, 90,.5);
-  margin: 0px;
-  height: 100%;
-}
-.vb.vb-dragging > .vb-dragger > .vb-dragger-styler {
-  background-color: rgba(75, 80, 90,.5);
+  background-color: rgba(8, 10, 16,.4);
   margin: 0px;
   height: 100%;
 }
 .vb.vb-dragging-phantom > .vb-dragger > .vb-dragger-styler {
-  background-color: rgba(75, 80, 90,.5);
+  background-color: rgba(8, 10, 16,.3);
 }

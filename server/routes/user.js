@@ -1,42 +1,97 @@
 const express = require('express');
 const router = express.Router();
+const User = require('../model/user');
+const crypto = require('crypto');
 
-const members = [
-	{ name: 'Tony', userid: '1001', sex: '男', age: 24, location: '三里屯', job: '程序猿', moto: 'to be no1' },
-	{ name: 'Jenny', userid: '1002', sex: '女', age: 28, location: '上海', job: '产品', moto: 'keep running' },
-	{ name: 'Christina', userid: '1003', sex: '女', age: 21, location: '杭州', job: '设计师', moto: 'be what you wanna be' }
-];
+router.post('/api/regist',registSubmitController);
+router.post('/api/login', loginController);
+router.post('/api/logout', logoutController);
 
-router.get('/getMembers', function(req, res, next) {
-	res.json({
-		code: 0,
-		members
-	});
-});
+function registSubmitController(req, res, next){
+	let data = req.body;
+	
+	if(!data.username){
+		return res.json({
+			code: -1,
+			msg: '请填写用户名'
+		});
+	}
 
-router.post('/addMember', function(req, res, next) {
-	members.push(req.body);
-	res.json({
-		code: 0
-	});
-});
+	if(!data.password){
+		return res.json({
+			code: -2,
+			msg: '请填写密码'
+		});
+	}
 
-router.get('/removeMember', function(req, res, next) {
-	let bool = -1;
-	let code = -1;
-	members.forEach((v, i) => {
-		if (v.userid == req.query.userid) {
-			members.splice(i, 1)
-			bool = i;
+	if(!data.sex){
+		return res.json({
+			code: -3,
+			msg: '请选择性别'
+		});
+	}
+
+	let md5 = crypto.createHash('md5');
+	let password_md5 = md5.update(data.password).digest('hex');
+	data.password = password_md5;
+
+	User.getUserByName(data.username).then(doc => {
+		if (doc) {
+			res.json({
+				code: -1,
+				msg: '该用户名已经被注册'
+			});
+		} else {
+			User.createUser(data).then(result => {
+				res.json({
+					code: 0,
+					msg: '注册成功'
+				});
+			});
 		}
 	});
-	if(bool !== -1){
-		code = 0;
-	}
-	res.json({
-		code: code,
-		index: bool
+}
+
+function loginController(req, res, next) {
+	let data = req.body;
+	let md5 = crypto.createHash('md5');
+	let password_md5 = md5.update(data.password).digest('hex');
+
+	User.getUserByName(data.username).then(doc => {
+		let cb = {
+			code: 0,
+			msg: '登录成功'
+		};
+
+		if (!doc) {
+			cb = {
+				code: -1,
+				msg: '没有此用户'
+			};
+		} else if (password_md5 !== doc.password) {
+			cb = {
+				code: -2,
+				msg: '密码错误'
+			}
+		} else {
+			res.cookie('user', {
+				userid: doc._id,
+				username: doc.username
+			}, {
+				maxAge: 1000 * 60 * 60 * 24,
+				httpOnly: false
+			});
+		}
+		res.json(cb);
 	});
-});
+}
+
+function logoutController(req, res, next) {
+	res.clearCookie('user');
+	res.json({
+		code: 0,
+		msg: '已退出登录'
+	});
+}
 
 module.exports = router;

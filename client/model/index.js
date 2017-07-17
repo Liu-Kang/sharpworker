@@ -21,6 +21,12 @@ class ChatModel extends Fetch {
 			params
 		})
 	}
+
+	doLogout() {
+		return this.send({
+			url: '/api/logout'
+		})
+	}
 }
 
 export default new ChatModel()

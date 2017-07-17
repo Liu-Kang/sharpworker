@@ -19,11 +19,11 @@ function indexController(req, res, next) {
         code: 0,
         user: u
       });
-    })
+    });
   } else {
     res.json({
       code: 0,
-      user: u
+      user: null
     });
   }
 }
