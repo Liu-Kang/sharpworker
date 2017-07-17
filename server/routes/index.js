@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../model/user');
 
-router.get('/getIndex', indexController);
+router.get('/api/getIndex', indexController);
 
 
 function indexController(req, res, next) {

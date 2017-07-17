@@ -33,7 +33,7 @@
         <div class="tab-item">
             <a class="group" title="聊天室" href="javascript:;">
             	<i v-if="currentTab === 'group'" class="group-icon selected"></i>
-				<i v-else class="group-icon"></i>
+							<i v-else class="group-icon"></i>
             </a>
         </div>
         <div class="tab-item">
@@ -58,8 +58,8 @@
 <script>
 	import roomlist from './roomlist.vue'
 	import privatelist from './privatelist.vue'
-	import { mapGetters } from 'vuex'
-	import ChatModel from '../model'
+	import { mapGetters, mapActions } from 'vuex'
+	import UserModel from '../model/user'
 
 	export default {
 		data() {
@@ -99,6 +99,9 @@
 			}
 		},
 		methods: {
+			...mapActions([
+        'showRoomApply'
+      ]),
 			/**
 			 * 隐藏、显示功能列表
 			 * @return {[type]} [description]
@@ -116,7 +119,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-        	return ChatModel.doLogout()
+        	return UserModel.doLogout()
         }).then(data => {
 					if (data.code === 0) {
 						this.$router.go(0)
@@ -130,7 +133,7 @@
 			 * @return {[type]} [description]
 			 */
 			createRoom() {
-				console.log('create')
+				this.showRoomApply(true)
 			}
 		}
 	}

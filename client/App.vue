@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import ChatModel from './model'
+  import UserModel from './model/user'
   import { mapActions } from 'vuex'
 
   export default {
@@ -16,7 +16,7 @@
       }
     },
     created() {
-      ChatModel.getIndex().then(data => {
+      UserModel.getIndex().then(data => {
         if (data.code === 0) {
             if (data.user) {
               this.setUser(data.user)
@@ -38,7 +38,6 @@
 </script>
 
 <style lang="less">
-  @import './style/common.less';
   #app {
     width: 100%;
     height: 100%;

@@ -30,8 +30,10 @@ app.use(WebpackHotMiddleware(compiler));
 
 var index = require('./server/routes/index');
 var user = require('./server/routes/user');
+var chat = require('./server/routes/chat');
 app.use(index);
 app.use(user);
+app.use(chat);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

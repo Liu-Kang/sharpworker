@@ -3,6 +3,7 @@
     <div class="inner-container">
     	<leftbox></leftbox>
     	<rightbox></rightbox>
+      <createroom></createroom>
     </div>
   </div>
 </template>
@@ -10,6 +11,7 @@
 <script>
 	import leftbox from '../components/leftbox.vue'
 	import rightbox from '../components/rightbox.vue'
+  import createroom from '../components/createroom.vue'
 
 	export default {
 		data() {
@@ -18,7 +20,8 @@
 		},
 		components:{
     	leftbox,
-    	rightbox
+    	rightbox,
+      createroom
   	}
 	}
 </script>

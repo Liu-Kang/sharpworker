@@ -2,9 +2,9 @@
 	<div class="regist-container">
 		<div class="regist-box">
 			<h1 class="regist-title">Regist</h1>
-			<input type="text" v-model.trim="username" placeholder="用户名">
-			<input type="password" v-model.trim="password" placeholder="密码">
-            <input type="password" v-model.trim="repassword" placeholder="再次输入密码">
+            <el-input v-model.trim="username" placeholder="用户名"></el-input>
+            <el-input type="password" v-model.trim="password" placeholder="密码"></el-input>
+            <el-input type="password" v-model.trim="repassword" placeholder="再次输入密码"></el-input>
             <div class="sex-pick">
                 <el-radio class="radio" v-model="sex" label="1">男</el-radio>
                 <el-radio class="radio" v-model="sex" label="0">女</el-radio>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import ChatModel from '../model'
+    import UserModel from '../model/user'
 
 	export default {
 		data () {
@@ -85,7 +85,7 @@
                     sex: this.sex
                 }
                 let self = this
-                ChatModel.doRegist(params).then(data => {
+                UserModel.doRegist(params).then(data => {
                     if (data.code === 0) {
                         self.$router.push({name: 'login'})
                         // self.$store.user.user.name = params.name
@@ -99,7 +99,6 @@
 </script>
 
 <style lang="less">
-	@import '../style/common.less';
 	.regist-container{
         width: 100%;
         height: 100%;

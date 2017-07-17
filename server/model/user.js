@@ -10,24 +10,22 @@ const UserModel = mongoose.model('user', UserSchema);
 class User {
 	createUser(data) {
 		return new Promise((resolved, rejected) => {
-			let userEntity = new UserModel(data);
+			const userEntity = new UserModel(data);
 			userEntity.save(function(err, result){
-				if(err){
-					throw err;
-				}else{
-					resolved(result);
-				}
+				if (err) {
+          throw err
+        }
+        resolved(result);
 			});
 		});
 	}
 	getUserByName(name) {
 		return new Promise((resolved, rejected) => {
-			UserModel.findOne({username: name}, (err, doc) => {
-				if(err){
-					throw err;
-				}else{
-					resolved(doc);
-				}
+			UserModel.findOne({ username: name }, (err, doc) => {
+				if (err) {
+          throw err
+        }
+        resolved(doc);
 			});
 		});
 	}

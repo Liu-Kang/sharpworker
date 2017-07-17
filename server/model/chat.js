@@ -1,22 +1,23 @@
 const mongoose = require('../config/mongoose');
 const Schema = mongoose.Schema;
-const ChatSchema = new Schema({
-  content: String,
-  date: String,
-  author: Object
+const RoomSchema = new Schema({
+  roomname: String, // 房间名
+  cdate: String, // 创建时间
+  creator: String, // 创建者id
+  password: String, // 进入房间密码
+  members: Array // 用户列表
 });
-const ChatModel = mongoose.model('chat', ChatSchema);
+const RoomModel = mongoose.model('room', RoomSchema);
 
 class Chat {
   createChatRoom(data) {
     return new Promise((resolved, rejected) => {
-      let chatEntity = new ChatModel(data);
-      chatEntity.save(function(err, result){
-        if(err){
-          throw err;
-        }else{
-          resolved(result);
+      const roomEntity = new RoomModel(data);
+      roomEntity.save(function(err, result){
+        if (err) {
+          throw err
         }
+        resolved(result);
       });
     });
   }

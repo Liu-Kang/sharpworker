@@ -2,8 +2,8 @@
 	<div class="login-container">
 		<div class="login-box">
 			<h1 class="login-title">Login</h1>
-			<input type="text" v-model.trim="username" placeholder="用户名">
-			<input type="password" v-model.trim="password" placeholder="密码">
+            <el-input v-model.trim="username" placeholder="用户名"></el-input>
+            <el-input type="password" v-model.trim="password" placeholder="密码"></el-input>
             <el-button type="primary" class="do-login" @click="doLogin" @keyup.13="doLogin">登录</el-button>
             <router-link class="go-regist" :to="{name: 'regist'}">注册</router-link>
 		</div>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    import ChatModel from '../model'
+    import UserModel from '../model/user'
     
 	export default {
         data() {
@@ -49,7 +49,7 @@
                     username: this.username,
                     password: this.password
                 }
-                ChatModel.doLogin(params).then(data => {
+                UserModel.doLogin(params).then(data => {
                     if (data.code === 0) {
                         this.$router.push({name: 'chat'})
                     } else {
@@ -62,7 +62,6 @@
 </script>
 
 <style lang="less">
-	@import '../style/common.less';
 	.login-container{
         width: 100%;
         height: 100%;

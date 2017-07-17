@@ -1,0 +1,61 @@
+@charset "utf-8";
+html, body, div, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, 
+dd, p, blockquote, pre, form, fieldset, table, th, td, input, table, textarea {
+  margin: 0;
+  padding: 0;
+}
+html{
+  width: 100%;
+  height: 100%;
+}
+body{
+  width: 100%;
+  height: 100%;
+  color: #FFF;
+  background-color: #dedede;
+  font-size: 14px;
+  font-family: Arial,'Microsoft YaHei'!important;
+  overflow: hidden;
+}
+ol,ul{
+  list-style:none;
+}
+a{
+  text-decoration: none;
+  color: #FFF;
+  -webkit-tap-highlight-color:transparent;
+}
+a, button, input, textarea {
+  outline: 0;
+}
+::-webkit-input-placeholder {
+  color: #dedede !important; 
+} 
+:-moz-placeholder {
+  color: #dedede !important; 
+} 
+::-moz-placeholder {
+  color: #dedede !important; 
+} 
+:-ms-input-placeholder {
+  color: #dedede !important; 
+}
+.ml5{ margin-top: 5px; }
+.mt5{ margin-top: 5px; }
+.mr5{ margin-right: 5px; }
+.mb5{ margin-bottom: 5px; }
+
+.ml10{ margin-top: 10px; }
+.mt10{ margin-top: 10px; }
+.mr10{ margin-right: 10px; }
+.mb10{ margin-bottom: 10px; }
+
+.ml15{ margin-top: 15px; }
+.mt15{ margin-top: 15px; }
+.mr15{ margin-right: 15px; }
+.mb15{ margin-bottom: 15px; }
+
+.ml20{ margin-top: 20px; }
+.mt20{ margin-top: 20px; }
+.mr20{ margin-right: 20px; }
+.mb20{ margin-bottom: 20px; }

@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../model/user');
 const crypto = require('crypto');
 
-router.post('/api/regist',registSubmitController);
+router.post('/api/regist', registSubmitController);
 router.post('/api/login', loginController);
 router.post('/api/logout', logoutController);
 
