@@ -1,20 +1,20 @@
 <template>
 	<div class="chat-list">
 		<div class="chat-scope">
-        	<div v-for="room in rooms" class="chat-item">
-        		<div class="ext">
-	                <p class="ext-time">{{room.time}}</p>
-	            </div>
-	            <div class="info">
-	                <h3 class="nickname">
-	                    <span>{{room.roomname}}</span>
-	                </h3>
-	                <p class="last-msg">
-	                    <span>{{room.lastmsg}}</span>
-	                </p>
-	            </div>
-	        </div>
-	    </div>
+    	<div v-for="room in rooms" class="chat-item">
+    		<div class="ext">
+              <p class="ext-time">{{room.time}}</p>
+          </div>
+          <div class="info">
+              <h3 class="nickname">
+                  <span>{{room.roomname}}</span>
+              </h3>
+              <p class="last-msg">
+                  <span>{{room.lastmsg || '暂无消息'}}</span>
+              </p>
+          </div>
+      </div>
+	  </div>
 	</div>
 </template>
 

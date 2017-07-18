@@ -1,6 +1,49 @@
 <template>
 	<div class="right-box">
-		
+		<div class="room-title">
+			<div class="title-wrap">
+				<span class="room-name">616</span>
+        <span class="room-size">(21)</span>
+        <i class="el-icon-arrow-down"></i>
+			</div>
+    </div>
+    <div class="room-content" v-bar="scrollbar">
+    	<div class="room-content-wrap">
+    		<ul class="room-content-list">
+          <li class="chat-item clearfix">
+          	<div class="chat-item-left">
+	        		<div class="chat-user">
+	        			<img src="../assets/girl.jpg" alt="">
+	        		</div>
+	        		<div class="chat-bubble">
+	        			<div class="chat-info clearfix">
+	        				<span class="fl mr10">LiuK</span>
+	        				<span class="fr">07-12 19:00</span>
+	        			</div>
+	        			<div class="chat-text">231312312</div>
+	        		</div>
+        		</div>
+          </li>
+          <li class="chat-item clearfix">
+          	<div class="chat-item-right">
+	        		<div class="chat-user">
+	        			<img src="../assets/boy.jpg" alt="">
+	        		</div>
+	        		<div class="chat-bubble">
+	        			<div class="chat-info clearfix">
+	        				<span class="fl mr10">07-12 19:00</span>
+	        				<span class="fr">LiuK</span>
+	        			</div>
+	        			<div class="chat-text">231312312</div>
+	        		</div>
+        		</div>
+          </li>
+        </ul>
+    	</div>
+    </div>
+		<div class="room-foot">
+			
+		</div>
 	</div>
 </template>
 
@@ -14,9 +57,108 @@
 	@import '../style/common.less';
 	.right-box{
 		position: relative;
-	    width: 720px;
-	    height: 100%;
+    width: 720px;
+    height: 100%;
+    background-color: #eee;
+    overflow: hidden;
+    color: #333;
+    .columnflex();
+    .room-content{
+    	.flex1();
+    }
+    .room-title{
+    	position: relative;
+	    padding: 10px 0;
+	    margin: 0 19px;
+	    border-bottom: 1px solid #d6d6d6;
 	    background-color: #eee;
-	    overflow: hidden;
+	    text-align: center;
+    }
+    .title-wrap{
+    	font-weight: 400;
+	    height: 25px;
+	    line-height: 25px;
+	    display: inline-block;
+	    font-size: 14px;
+	    cursor: pointer;
+    }
+    .el-icon-arrow-down{
+    	vertical-align: middle;
+    	.ml5();
+    }
+    .room-content-wrap{
+    	width: 100%;
+    	padding: 10px 20px;
+    	box-sizing: border-box;
+    	position: relative;
+    }
+    .room-content-list{
+    }
+    .chat-item{
+    	padding: 10px 0;
+    	.chat-bubble{
+		    padding: 9px 13px;
+		    background-color: #fff;
+		    max-width: 500px;
+		    display: inline-block;
+		    vertical-align: top;
+		    position: relative;
+		    text-align: left;
+		    font-size: 14px;
+		    border-radius: 3px;
+		    margin: 0 10px;
+		    float: left;
+		    .chat-info{
+		    	.c999();
+		    	font-size: 12px;
+		    	line-height: 18px;
+		    }
+		    .chat-text{
+		    	line-height: 24px;
+		    	word-wrap: break-word;
+		    	word-break: break-all;
+		    }
+		    &:after{
+		    	position: absolute;
+			    top: 14px;
+			    border: 6px solid transparent;
+			    content: '';
+		    }
+    	}
+    	.chat-user{
+    		float: left;
+    		img{
+    			width: 40px;
+			    height: 40px;
+			    border-radius: 2px;
+			    -moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    cursor: pointer;
+    		}
+    	}
+    	.chat-item-left{
+    		.chat-bubble{
+    			&:after{
+    				border-right-color: #f5f5f5;
+		  			border-right-width: 4px;
+			    	left: -10px;
+    			}
+    		}
+    	}
+    	.chat-item-right{
+    		.chat-bubble{
+    			background-color: #b2e281;
+    			float: right;
+    			&:after{
+    				border-left-color: #b2e281;
+		  			border-left-width: 4px;
+			    	left: 100%;
+    			}
+    		}
+    		.chat-user{
+    			float: right;
+    		}
+    	}
+    }
 	}
 </style>

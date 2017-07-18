@@ -1,19 +1,17 @@
 <template>
-  <div class="apply-box">
-    <el-dialog title="房间名称" :visible.sync="createRoomApply" :before-close="handleClose">
-      <el-input v-model="roomname" placeholder="请输入房间名称"></el-input>
-      <h6 class="mt15">是否需要密码进入</h6>
-      <div class="mt10">
-        <el-radio class="radio" v-model="isPublic" label="0">否</el-radio>
-        <el-radio class="radio" v-model="isPublic" label="1">是</el-radio>
-      </div>
-      <el-input class="mt10" v-show="Number(isPublic)" v-model="password" placeholder="请输入房间密码"></el-input>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="handleClose">取 消</el-button>
-        <el-button type="primary" @click="handleCreate">确 定</el-button>
-      </span>
-    </el-dialog>
-  </div>
+  <el-dialog title="房间名称" :visible.sync="createRoomApply" :before-close="handleClose">
+    <el-input v-model="roomname" placeholder="请输入房间名称"></el-input>
+    <h6 class="mt15">是否需要密码进入</h6>
+    <div class="mt10">
+      <el-radio class="radio" v-model="isPublic" label="0">否</el-radio>
+      <el-radio class="radio" v-model="isPublic" label="1">是</el-radio>
+    </div>
+    <el-input class="mt10" v-show="Number(isPublic)" v-model="password" placeholder="请输入房间密码"></el-input>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="handleClose">取 消</el-button>
+      <el-button type="primary" @click="handleCreate">确 定</el-button>
+    </span>
+  </el-dialog>
 </template>
 
 <script>
@@ -30,6 +28,7 @@
     },
     computed: {
       ...mapGetters([
+        'user',
         'createRoomApply'
       ])
     },
@@ -39,6 +38,9 @@
         'showRoomApply'
       ]),
       handleClose() {
+        this.roomname = ''
+        this.isPublic = '0'
+        this.password = ''
         this.showRoomApply(false)
       },
       handleCreate() {
@@ -61,7 +63,8 @@
         ChatModel.createRoom({
           roomname: this.roomname,
           password: this.password,
-          creator: this.user.id
+          creator: this.user.userid,
+          members: [this.user.userid]
         }).then(data => {
           if (data.code === 0) {
             this.handleClose()

@@ -1,8 +1,8 @@
 export default {
 	state:{
 		user:{
-			id: '',
-			name:'',
+			userid: '',
+			username:'',
 			sex: ''
 		},
 		createRoomApply: false

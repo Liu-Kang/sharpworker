@@ -2,10 +2,11 @@ const mongoose = require('../config/mongoose');
 const Schema = mongoose.Schema;
 const RoomSchema = new Schema({
   roomname: String, // 房间名
-  cdate: String, // 创建时间
+  cdate: { type: Date, default: Date.now }, // 创建时间
   creator: String, // 创建者id
   password: String, // 进入房间密码
-  members: Array // 用户列表
+  members: Array, // 用户列表
+  chatlist: [{ username: String, date: { type: Date, expires: '3d', default: Date.now }, content: String }] //聊天列表
 });
 const RoomModel = mongoose.model('room', RoomSchema);
 

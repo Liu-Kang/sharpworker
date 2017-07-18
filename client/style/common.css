@@ -11,7 +11,7 @@ html{
 body{
   width: 100%;
   height: 100%;
-  color: #FFF;
+  color: #333;
   background-color: #dedede;
   font-size: 14px;
   font-family: Arial,'Microsoft YaHei'!important;
@@ -22,7 +22,7 @@ ol,ul{
 }
 a{
   text-decoration: none;
-  color: #FFF;
+  color: #333;
   -webkit-tap-highlight-color:transparent;
 }
 a, button, input, textarea {
@@ -40,22 +40,37 @@ a, button, input, textarea {
 :-ms-input-placeholder {
   color: #dedede !important; 
 }
-.ml5{ margin-top: 5px; }
+.ml5{ margin-left: 5px; }
 .mt5{ margin-top: 5px; }
 .mr5{ margin-right: 5px; }
 .mb5{ margin-bottom: 5px; }
 
-.ml10{ margin-top: 10px; }
+.ml10{ margin-left: 10px; }
 .mt10{ margin-top: 10px; }
 .mr10{ margin-right: 10px; }
 .mb10{ margin-bottom: 10px; }
 
-.ml15{ margin-top: 15px; }
+.ml15{ margin-left: 15px; }
 .mt15{ margin-top: 15px; }
 .mr15{ margin-right: 15px; }
 .mb15{ margin-bottom: 15px; }
 
-.ml20{ margin-top: 20px; }
+.ml20{ margin-left: 20px; }
 .mt20{ margin-top: 20px; }
 .mr20{ margin-right: 20px; }
 .mb20{ margin-bottom: 20px; }
+
+.c333{ color: #333; }
+.c666{ color: #666; }
+.c999{ color: #999; }
+
+.clearfix{
+  zoom: 1;
+}
+.clearfix:after{
+  content: "";
+  display: block;
+  clear: both;
+}
+.fl{ float: left; }
+.fr{ float: right; }

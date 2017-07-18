@@ -14,6 +14,8 @@
   import createroom from '../components/createroom.vue'
   import ChatModel from '../model/chat'
 
+  import { mapGetters, mapActions } from 'vuex'
+
 	export default {
 		data() {
 			return {
@@ -27,9 +29,14 @@
     created() {
       ChatModel.getRoomlist().then(data => {
         if (data.code === 0) {
-          
+          this.setChatRooms(data.chatrooms)
         }
       })
+    },
+    methods: {
+      ...mapActions([
+        'setChatRooms'
+      ])
     }
 	}
 </script>

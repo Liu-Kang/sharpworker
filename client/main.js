@@ -4,6 +4,7 @@ import store from './store'
 import router from './router'
 import ElementUI from 'element-ui'
 import Vuebar from 'vuebar'
+import './style/common.css'
 import './style/theme/index.css'
 import './style/scrollbar.css'
 

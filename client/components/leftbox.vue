@@ -176,6 +176,7 @@
 	    word-wrap: break-word;
 	    word-break: break-all;
 	    width: 2000px;
+      color: #fff;
     }
     .opt{
     	display: table-cell;
@@ -216,6 +217,18 @@
 	    color: #fff;
 	    padding-left: 30px;
 	    font-size: 12px;
+      &::-webkit-input-placeholder {
+        color: #888 !important; 
+      } 
+      &:-moz-placeholder {
+        color: #888 !important; 
+      } 
+      &::-moz-placeholder {
+        color: #888 !important; 
+      } 
+      &:-ms-input-placeholder {
+        color: #888 !important; 
+      }
     }
     .tab{
     	overflow: hidden;
