@@ -6,46 +6,55 @@
 		<div class="in-chat" v-else>
 			<div class="room-title">
 				<div class="title-wrap">
-					<span class="room-name">{{currentRoom.roomname}}</span>
-	        <span class="room-size" v-if="currentRoom.type === 'public'">(21)</span>
+					<span class="room-name">{{currentRoom.detail.roomname}}</span>
+	        <span class="room-size" v-if="currentRoom.type === 'public'">({{currentRoom.detail.members.length}})</span>
 	        <i class="el-icon-arrow-down"></i>
 				</div>
 	    </div>
 	    <div class="room-content" v-bar="scrollbar">
-	    	<div class="room-content-wrap">
-	    		<ul class="room-content-list">
-	          <li class="chat-item clearfix">
-	          	<div class="chat-item-left">
-		        		<div class="chat-user">
-		        			<img src="../assets/girl.jpg" alt="">
+	    	<div class="room-overview">
+		    	<div class="room-content-wrap">
+		    		<ul class="room-content-list">
+		          <li class="chat-item clearfix">
+		          	<div class="chat-item-left">
+			        		<div class="chat-user">
+			        			<img src="../assets/girl.jpg" alt="">
+			        		</div>
+			        		<div class="chat-bubble">
+			        			<div class="chat-info clearfix">
+			        				<span class="fl mr10">LiuK</span>
+			        				<span class="fr">07-12 19:00</span>
+			        			</div>
+			        			<div class="chat-text">231312312</div>
+			        		</div>
 		        		</div>
-		        		<div class="chat-bubble">
-		        			<div class="chat-info clearfix">
-		        				<span class="fl mr10">LiuK</span>
-		        				<span class="fr">07-12 19:00</span>
-		        			</div>
-		        			<div class="chat-text">231312312</div>
+		          </li>
+		          <li class="chat-item clearfix">
+		          	<div class="chat-item-right">
+			        		<div class="chat-user">
+			        			<img src="../assets/boy.jpg" alt="">
+			        		</div>
+			        		<div class="chat-bubble">
+			        			<div class="chat-info clearfix">
+			        				<span class="fl mr10">07-12 19:00</span>
+			        				<span class="fr">LiuK</span>
+			        			</div>
+			        			<div class="chat-text">231312312</div>
+			        		</div>
 		        		</div>
-	        		</div>
-	          </li>
-	          <li class="chat-item clearfix">
-	          	<div class="chat-item-right">
-		        		<div class="chat-user">
-		        			<img src="../assets/boy.jpg" alt="">
-		        		</div>
-		        		<div class="chat-bubble">
-		        			<div class="chat-info clearfix">
-		        				<span class="fl mr10">07-12 19:00</span>
-		        				<span class="fr">LiuK</span>
-		        			</div>
-		        			<div class="chat-text">231312312</div>
-		        		</div>
-	        		</div>
-	          </li>
-	        </ul>
+		          </li>
+		        </ul>
+		    	</div>
 	    	</div>
 	    </div>
 			<div class="room-foot">
+				<div class="chat-area">
+					<pre class="chat-input" contenteditable placeholder=""></pre>
+				</div>
+				<div class="chat-action">
+					<span>按下Ctrl+Enter换行</span>
+					<el-button class="send-btn">发 送</el-button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -57,13 +66,28 @@
 	export default {
 		data() {
 			return {
-
+				scrollbar: {
+			    preventParentScroll: true,
+			    scrollThrottle: 30
+			  }
 			}
 		},
 		computed: {
 			...mapGetters([
 				'currentRoom'
-			])
+			]),
+			roomid() {
+				return this.currentRoom.detail._id
+			}
+		},
+		watch: {
+			roomid() {
+				this.$nextTick(() => {
+					const viewport = document.querySelector('.room-content')
+					const overview = document.querySelector('.room-overview')
+					overview.style.height = `${viewport.clientHeight}px`
+				})
+			}
 		}
 	}
 </script>
@@ -189,6 +213,41 @@
     		.chat-user{
     			float: right;
     		}
+    	}
+    }
+    .room-foot{
+    	height: 180px;
+    	border-top: 1px solid #d6d6d6;
+    	.chat-area{
+    		width: 100%;
+    		height: 130px;
+    	}
+    	.chat-input{
+    		display: block;
+    		box-sizing: border-box;
+    		padding: 10px 20px;
+    		min-height: 100%;
+    		white-space: pre-wrap;
+    		word-break: normal;
+    		cursor: text;
+    		font-family: 'Microsoft YaHei';
+    		outline: 0;
+    		&:empty::before {  
+          content: attr(placeholder);  
+          .c999();
+        }
+    	}
+    	.chat-action{
+    		padding: 0 20px;
+    		height: 30px;
+    		line-height: 30px;
+    		text-align: right;
+    	}
+    	.send-btn{
+    		.ml10();
+    		height: 30px;
+    		line-height: 30px;
+    		padding: 0 15px;
     	}
     }
 	}

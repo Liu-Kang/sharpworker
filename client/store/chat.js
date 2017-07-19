@@ -2,9 +2,8 @@ export default {
 	state: {
 		roomlist: [],
 		currentRoom: {
-			type: '', // public / private / empty
-			id: '', // roomid / userid
-			name: ''
+			type: 'empty', // public / private / empty
+			detail: {}
 		}
 	},
 	mutations: {

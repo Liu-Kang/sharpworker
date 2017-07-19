@@ -46,11 +46,22 @@ function getRoomListController(req, res, next) {
 }
 
 function getRoomDetailController(req, res, next) {
-  Chat.getRoomDetail(req.query).then(doc => {
+  const data = req.query
+  const query = {}
+  if (data.roomid) {
+    query._id = data.roomid
+  }
+  if (data.roomname) {
+    query.roomname = data.roomname
+  }
+  Chat.getRoomDetail(query).then(doc => {
+    let result = doc.toObject();
+    delete result.password;
+
     res.json({
       code: 0,
       msg: '获取成功',
-      room: doc
+      room: result
     });
   })
 }

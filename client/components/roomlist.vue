@@ -3,23 +3,25 @@
 		<div class="chat-scope">
     	<div v-for="room in roomlist" class="chat-item" @click="enterRoom(room)">
     		<div class="ext">
-              <p class="ext-time">{{room.time}}</p>
-          </div>
-          <div class="info">
-              <h3 class="nickname">
-                  <span>{{room.roomname}}</span>
-              </h3>
-              <p class="last-msg">
-                  <span>{{room.lastmsg || '暂无消息'}}</span>
-              </p>
-          </div>
+          <p class="ext-time">{{room.time}}</p>
+        </div>
+        <div class="info">
+          <h3 class="nickname">
+            <span>{{room.roomname}}</span>
+          </h3>
+          <p class="last-msg">
+            <span>{{room.lastmsg || '暂无消息'}}</span>
+          </p>
+        </div>
       </div>
 	  </div>
 	</div>
 </template>
 
 <script>
+	import ChatModel from '../model/chat'
 	import { mapGetters, mapActions } from 'vuex'
+
 	export default {
 		data() {
 			return {
@@ -35,9 +37,17 @@
 				'changeCurrentRoom'
 			]),
 			enterRoom(room) {
-				this.changeCurrentRoom({
-					type: 'public',
-					id: room.roomid
+				ChatModel.getRoomDetail({
+					roomid: room.roomid
+				}).then(data => {
+					if (data.code === 0) {
+						this.changeCurrentRoom({
+							type: 'public',
+							detail: data.room
+						})
+					} else {
+						this.$message.error(data.msg)
+					}
 				})
 			}
 		}

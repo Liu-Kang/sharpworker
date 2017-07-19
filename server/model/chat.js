@@ -43,8 +43,15 @@ class Chat {
   /**
    * 获取单个房间详情
    */
-  getRoomDetail() {
-    
+  getRoomDetail(query) {
+    return new Promise((resolved, rejected) => {
+      RoomModel.findOne(query, function(err, doc){
+        if (err) {
+          throw err
+        }
+        resolved(doc);
+      });
+    });
   }
 }
 
