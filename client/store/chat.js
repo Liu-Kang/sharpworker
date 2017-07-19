@@ -1,29 +1,32 @@
 export default {
 	state: {
-		rooms: [],
-		current: {
-			type: '', // public / private
-			id: '' // roomid / userid
+		roomlist: [],
+		currentRoom: {
+			type: '', // public / private / empty
+			id: '', // roomid / userid
+			name: ''
 		}
 	},
 	mutations: {
 		SET_CHAT_ROOMS(state, data) {
-			state.rooms = data
+			state.roomlist = data
 		},
 		CHANGE_CURRENT(state, data) {
 			state.currentRoom = data
 		}
 	},
 	actions: {
+		// 塞入房间列表
 		setChatRooms({ commit }, data) {
 			commit('SET_CHAT_ROOMS', data)
 		},
+		// 更换当前聊天房间
 		changeCurrentRoom({ commit }, data) {
 			commit('CHANGE_CURRENT', data)
-		}
+		},
 	},
 	getters:{
-		rooms: state => state.rooms,
-		current: state => state.current
+		roomlist: state => state.roomlist,
+		currentRoom: state => state.currentRoom
 	}
 }

@@ -1,7 +1,7 @@
 <template>
 	<div class="chat-list">
 		<div class="chat-scope">
-    	<div v-for="room in rooms" class="chat-item">
+    	<div v-for="room in roomlist" class="chat-item" @click="enterRoom(room)">
     		<div class="ext">
               <p class="ext-time">{{room.time}}</p>
           </div>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-	import { mapGetters } from 'vuex'
+	import { mapGetters, mapActions } from 'vuex'
 	export default {
 		data() {
 			return {
@@ -27,8 +27,19 @@
 		},
 		computed: {
 			...mapGetters([
-				'rooms'
+				'roomlist'
 			])
+		},
+		methods: {
+			...mapActions([
+				'changeCurrentRoom'
+			]),
+			enterRoom(room) {
+				this.changeCurrentRoom({
+					type: 'public',
+					id: room.roomid
+				})
+			}
 		}
 	}
 </script>

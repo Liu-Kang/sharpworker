@@ -39,6 +39,13 @@ class Chat {
       });
     });
   }
+
+  /**
+   * 获取单个房间详情
+   */
+  getRoomDetail() {
+    
+  }
 }
 
 module.exports = new Chat();

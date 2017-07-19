@@ -20,6 +20,16 @@ class ChatModel extends Fetch {
       method: 'GET'
     })
   }
+  /**
+   * 获取房间详情 
+   */
+  getRoomDetail(params) {
+    return this.send({
+      url: '/api/getRoomDetail',
+      method: 'GET',
+      params
+    })
+  }
 }
 
 export default new ChatModel()

@@ -12,7 +12,8 @@
 
 <script>
     import UserModel from '../model/user'
-    
+    import { mapActions } from 'vuex'
+
 	export default {
         data() {
             return {
@@ -29,6 +30,9 @@
             }
         },
 		methods: {
+            ...mapActions([
+                'setUser'
+            ]),
             doLogin() {
                 if(!this.username){
                     this.$message({
@@ -51,7 +55,14 @@
                 }
                 UserModel.doLogin(params).then(data => {
                     if (data.code === 0) {
-                        this.$router.push({name: 'chat'})
+                        UserModel.getIndex().then(result => {
+                            if (result.code === 0) {
+                                if (result.user) {
+                                    this.setUser(result.user)
+                                    this.$router.push({name: 'chat'})
+                                }
+                            }
+                        })
                     } else {
                         this.$message.error(data.msg)
                     }
@@ -109,6 +120,7 @@
             position: absolute;
             bottom: -60px;
             left: 0;
+            color: #fff;
         }
     }
 </style>

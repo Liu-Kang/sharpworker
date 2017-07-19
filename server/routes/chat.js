@@ -5,6 +5,7 @@ const crypto = require('crypto');
 
 router.post('/api/createRoom', createRoomController);
 router.get('/api/getRoomList', getRoomListController);
+router.get('/api/getRoomDetail', getRoomDetailController)
 
 function createRoomController(req, res, next) {
   let data = req.body;
@@ -25,6 +26,7 @@ function getRoomListController(req, res, next) {
     let chatlist = [];
     doc.forEach(v => {
       chatlist.push({
+        roomid: v._id,
         roomname: v.roomname,
         lastchat: v.chatlist.pop()
       });
@@ -41,6 +43,16 @@ function getRoomListController(req, res, next) {
       msg: 'Server Error'
     });
   });
+}
+
+function getRoomDetailController(req, res, next) {
+  Chat.getRoomDetail(req.query).then(doc => {
+    res.json({
+      code: 0,
+      msg: '获取成功',
+      room: doc
+    });
+  })
 }
 
 module.exports = router;

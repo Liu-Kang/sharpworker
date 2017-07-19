@@ -1,55 +1,70 @@
 <template>
 	<div class="right-box">
-		<div class="room-title">
-			<div class="title-wrap">
-				<span class="room-name">616</span>
-        <span class="room-size">(21)</span>
-        <i class="el-icon-arrow-down"></i>
+		<div class="in-empty" v-if="!currentRoom.type || currentRoom.type === 'empty'">
+			<div class="empty-icon"></div>
+		</div>
+		<div class="in-chat" v-else>
+			<div class="room-title">
+				<div class="title-wrap">
+					<span class="room-name">{{currentRoom.roomname}}</span>
+	        <span class="room-size" v-if="currentRoom.type === 'public'">(21)</span>
+	        <i class="el-icon-arrow-down"></i>
+				</div>
+	    </div>
+	    <div class="room-content" v-bar="scrollbar">
+	    	<div class="room-content-wrap">
+	    		<ul class="room-content-list">
+	          <li class="chat-item clearfix">
+	          	<div class="chat-item-left">
+		        		<div class="chat-user">
+		        			<img src="../assets/girl.jpg" alt="">
+		        		</div>
+		        		<div class="chat-bubble">
+		        			<div class="chat-info clearfix">
+		        				<span class="fl mr10">LiuK</span>
+		        				<span class="fr">07-12 19:00</span>
+		        			</div>
+		        			<div class="chat-text">231312312</div>
+		        		</div>
+	        		</div>
+	          </li>
+	          <li class="chat-item clearfix">
+	          	<div class="chat-item-right">
+		        		<div class="chat-user">
+		        			<img src="../assets/boy.jpg" alt="">
+		        		</div>
+		        		<div class="chat-bubble">
+		        			<div class="chat-info clearfix">
+		        				<span class="fl mr10">07-12 19:00</span>
+		        				<span class="fr">LiuK</span>
+		        			</div>
+		        			<div class="chat-text">231312312</div>
+		        		</div>
+	        		</div>
+	          </li>
+	        </ul>
+	    	</div>
+	    </div>
+			<div class="room-foot">
 			</div>
-    </div>
-    <div class="room-content" v-bar="scrollbar">
-    	<div class="room-content-wrap">
-    		<ul class="room-content-list">
-          <li class="chat-item clearfix">
-          	<div class="chat-item-left">
-	        		<div class="chat-user">
-	        			<img src="../assets/girl.jpg" alt="">
-	        		</div>
-	        		<div class="chat-bubble">
-	        			<div class="chat-info clearfix">
-	        				<span class="fl mr10">LiuK</span>
-	        				<span class="fr">07-12 19:00</span>
-	        			</div>
-	        			<div class="chat-text">231312312</div>
-	        		</div>
-        		</div>
-          </li>
-          <li class="chat-item clearfix">
-          	<div class="chat-item-right">
-	        		<div class="chat-user">
-	        			<img src="../assets/boy.jpg" alt="">
-	        		</div>
-	        		<div class="chat-bubble">
-	        			<div class="chat-info clearfix">
-	        				<span class="fl mr10">07-12 19:00</span>
-	        				<span class="fr">LiuK</span>
-	        			</div>
-	        			<div class="chat-text">231312312</div>
-	        		</div>
-        		</div>
-          </li>
-        </ul>
-    	</div>
-    </div>
-		<div class="room-foot">
-			
 		</div>
 	</div>
 </template>
 
 <script>
+	import { mapGetters, mapActions } from 'vuex'
+
 	export default {
-		
+		data() {
+			return {
+
+			}
+		},
+		computed: {
+			...mapGetters([
+				'currentRoom'
+			])
+		}
 	}
 </script>
 
@@ -62,7 +77,23 @@
     background-color: #eee;
     overflow: hidden;
     color: #333;
-    .columnflex();
+    .in-empty{
+			width: 100%;
+    	height: 100%;
+    	overflow: hidden;
+    	.empty-icon{
+    		width: 120px;
+    		height: 98px;
+    		.icon(-150px,0);
+    		margin: 200px auto;
+    	}
+    }
+    .in-chat{
+    	width: 100%;
+    	height: 100%;
+    	overflow: hidden;
+    	.columnflex();
+    }
     .room-content{
     	.flex1();
     }
