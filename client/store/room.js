@@ -12,6 +12,9 @@ export default {
 		},
 		CHANGE_CURRENT(state, data) {
 			state.currentRoom = data
+		},
+		SET_CHAT_List(state, data) {
+			state.currentRoom.detail.chatlist.push(data)
 		}
 	},
 	actions: {
@@ -23,6 +26,10 @@ export default {
 		changeCurrentRoom({ commit }, data) {
 			commit('CHANGE_CURRENT', data)
 		},
+		// 塞入一条聊天进聊天列表
+		setChatList({ commit }, data) {
+			commit('SET_CHAT_List', data)
+		}
 	},
 	getters:{
 		roomlist: state => state.roomlist,

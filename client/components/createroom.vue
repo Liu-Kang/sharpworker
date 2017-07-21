@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import ChatModel from '../model/chat'
+  import RoomModel from '../model/room'
   import { mapGetters, mapActions } from 'vuex'
 
   export default {
@@ -60,7 +60,7 @@
           return false
         }
 
-        ChatModel.createRoom({
+        RoomModel.createRoom({
           roomname: this.roomname,
           password: this.password,
           creator: this.user.userid,

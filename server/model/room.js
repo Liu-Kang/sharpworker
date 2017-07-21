@@ -6,11 +6,20 @@ const RoomSchema = new Schema({
   creator: String, // 创建者id
   password: String, // 进入房间密码
   members: Array, // 用户列表
-  chatlist: [{ username: String, date: { type: Date, expires: '3d', default: Date.now }, content: String }] //聊天列表
+  chatlist: [{ // 聊天列表
+    user: { // 发送者
+      userid: String,
+      username: String,
+      sex: Number
+    },
+    date: { type: Date, expires: '3d', default: Date.now }, // 聊天时间
+    content: String, // 聊天内容
+    to: String // 被@者
+  }]
 });
 const RoomModel = mongoose.model('room', RoomSchema);
 
-class Chat {
+class Room {
   /**
    * 创建房间
    */
@@ -18,9 +27,8 @@ class Chat {
     return new Promise((resolved, rejected) => {
       const roomEntity = new RoomModel(data);
       roomEntity.save(function(err, result){
-        if (err) {
+        if (err)
           throw err
-        }
         resolved(result);
       });
     });
@@ -32,9 +40,8 @@ class Chat {
   getAllRooms() {
     return new Promise((resolved, rejected) => {
       RoomModel.find(function(err, doc){
-        if (err) {
+        if (err)
           throw err
-        }
         resolved(doc);
       });
     });
@@ -46,13 +53,40 @@ class Chat {
   getRoomDetail(query) {
     return new Promise((resolved, rejected) => {
       RoomModel.findOne(query, function(err, doc){
-        if (err) {
+        if (err)
           throw err
-        }
+        resolved(doc);
+      });
+    });
+  }
+
+  /**
+   * 塞入一条聊天
+   */
+  setOneChat(data) {
+    return new Promise((resolved, rejected) => {
+      RoomModel.where(data.where).update({
+        $push: { chatlist: data.set }
+      }, function(err, result){
+        if (err)
+          throw err
+        resolved(result);
+      });
+    });
+  }
+
+  /**
+   * 获取聊天列表
+   */
+  getChatListByRoomid(query) {
+    return new Promise((resolved, rejected) => {
+      RoomModel.findOne(query, 'chatlist', function(err, doc){
+        if (err)
+          throw err
         resolved(doc);
       });
     });
   }
 }
 
-module.exports = new Chat();
+module.exports = new Room();

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-	import ChatModel from '../model/chat'
+	import RoomModel from '../model/room'
 	import { mapGetters, mapActions } from 'vuex'
 
 	export default {
@@ -37,7 +37,7 @@
 				'changeCurrentRoom'
 			]),
 			enterRoom(room) {
-				ChatModel.getRoomDetail({
+				RoomModel.getRoomDetail({
 					roomid: room.roomid
 				}).then(data => {
 					if (data.code === 0) {

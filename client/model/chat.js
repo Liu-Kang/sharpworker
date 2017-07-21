@@ -2,31 +2,12 @@ import Fetch from './fetch'
 
 class ChatModel extends Fetch {
   /**
-   * 创建房间
-   * @return {[type]} [description]
+   * 发送消息
+   * @return {[Promise]} [description]
    */
-  createRoom(params) {
+  sendChat(params) {
     return this.send({
-      url: '/api/createRoom',
-      params
-    })
-  }
-  /**
-   * 获取房间列表
-   */
-  getRoomlist() {
-    return this.send({
-      url: '/api/getRoomList',
-      method: 'GET'
-    })
-  }
-  /**
-   * 获取房间详情 
-   */
-  getRoomDetail(params) {
-    return this.send({
-      url: '/api/getRoomDetail',
-      method: 'GET',
+      url: '/api/sendChat',
       params
     })
   }

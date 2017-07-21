@@ -15,31 +15,29 @@
 	    	<div class="room-overview">
 		    	<div class="room-content-wrap">
 		    		<ul class="room-content-list">
-		          <li class="chat-item clearfix">
-		          	<div class="chat-item-left">
+		          <li v-if="chatlist.length > 0" v-for="chat in chatlist" class="chat-item clearfix">
+                <div v-if="chat.user.username === user.username" class="chat-item-right">
+                  <div class="chat-user">
+                    <img :src="chat.user.sex | avatar">
+                  </div>
+                  <div class="chat-bubble">
+                    <div class="chat-info clearfix">
+                      <span class="fl mr10">{{moment(chat.date).format('MM-DD')}}</span>
+                      <span class="fr">{{chat.user.username}}</span>
+                    </div>
+                    <div class="chat-text">{{chat.content}}</div>
+                  </div>
+                </div>
+		          	<div v-else class="chat-item-left">
 			        		<div class="chat-user">
-			        			<img src="../assets/girl.jpg" alt="">
+			        			<img :src="chat.user.sex | avatar">
 			        		</div>
 			        		<div class="chat-bubble">
 			        			<div class="chat-info clearfix">
-			        				<span class="fl mr10">LiuK</span>
-			        				<span class="fr">07-12 19:00</span>
+			        				<span class="fl mr10">{{chat.user.username}}</span>
+			        				<span class="fr">{{moment(chat.date).format('MM-DD')}}</span>
 			        			</div>
-			        			<div class="chat-text">231312312</div>
-			        		</div>
-		        		</div>
-		          </li>
-		          <li class="chat-item clearfix">
-		          	<div class="chat-item-right">
-			        		<div class="chat-user">
-			        			<img src="../assets/boy.jpg" alt="">
-			        		</div>
-			        		<div class="chat-bubble">
-			        			<div class="chat-info clearfix">
-			        				<span class="fl mr10">07-12 19:00</span>
-			        				<span class="fr">LiuK</span>
-			        			</div>
-			        			<div class="chat-text">231312312</div>
+			        			<div class="chat-text">{{chat.content}}</div>
 			        		</div>
 		        		</div>
 		          </li>
@@ -49,11 +47,11 @@
 	    </div>
 			<div class="room-foot">
 				<div class="chat-area">
-					<pre class="chat-input" contenteditable placeholder=""></pre>
+					<pre class="chat-input" id="send-chat" contenteditable placeholder=""></pre>
 				</div>
 				<div class="chat-action">
 					<span>按下Ctrl+Enter换行</span>
-					<el-button class="send-btn">发 送</el-button>
+					<el-button class="send-btn" @click="sendMyChat">发 送</el-button>
 				</div>
 			</div>
 		</div>
@@ -62,10 +60,14 @@
 
 <script>
 	import { mapGetters, mapActions } from 'vuex'
+  import RoomModel from '../model/room'
+  import ChatModel from '../model/chat'
+  import moment from 'moment'
 
 	export default {
 		data() {
 			return {
+        moment: moment,
 				scrollbar: {
 			    preventParentScroll: true,
 			    scrollThrottle: 30
@@ -74,11 +76,15 @@
 		},
 		computed: {
 			...mapGetters([
+        'user',
 				'currentRoom'
 			]),
 			roomid() {
 				return this.currentRoom.detail._id
-			}
+			},
+      chatlist() {
+        return this.currentRoom.detail.chatlist
+      }
 		},
 		watch: {
 			roomid() {
@@ -88,7 +94,39 @@
 					overview.style.height = `${viewport.clientHeight}px`
 				})
 			}
-		}
+		},
+    filters: {
+      avatar(sex) {
+        return sex ? '../assets/boy.jpg' : '../assets/girl.jpg'
+      }
+    },
+    methods: {
+      ...mapActions([
+        'setChatList'
+      ]),
+      sendMyChat() {
+        const con = document.querySelector('#send-chat').innerHTML.trim()
+
+        if (!con) {
+          this.$message.error('请输入内容')
+          return false
+        }
+        if (con.length > 500) {
+          this.$message.error('输入内容不能超过500字')
+          return false
+        }
+        ChatModel.sendChat({
+          content: con,
+          user: this.user,
+          roomid: this.roomid 
+        }).then(data => {
+          if (data.code === 0) {
+            document.querySelector('#send-chat').innerHTML = ''
+            this.setChatList(data.chat)
+          }
+        })
+      }
+    }
 	}
 </script>
 

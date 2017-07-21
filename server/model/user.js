@@ -15,9 +15,8 @@ class User {
 		return new Promise((resolved, rejected) => {
 			const userEntity = new UserModel(data);
 			userEntity.save(function(err, result){
-				if (err) {
+				if (err)
           throw err
-        }
         resolved(result);
 			});
 		});
@@ -29,9 +28,8 @@ class User {
 	getUserByName(name) {
 		return new Promise((resolved, rejected) => {
 			UserModel.findOne({ username: name }, (err, doc) => {
-				if (err) {
+				if (err)
           throw err
-        }
         resolved(doc);
 			});
 		});

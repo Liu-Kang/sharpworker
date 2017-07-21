@@ -2,13 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import user from './user'
-import chat from './chat'
+import room from './room'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 	modules:{
 		user,
-		chat
+    room
 	}
 })

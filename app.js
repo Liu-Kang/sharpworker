@@ -1,21 +1,20 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+// webpack相关
+const webpack = require('webpack');
+const WebpackDevMiddleware = require('webpack-dev-middleware');
+const WebpackHotMiddleware = require('webpack-hot-middleware');
+const config = require('./webpack.config');
+const compiler = webpack(config);
 
-//webpack
-var webpack = require('webpack');
-var WebpackDevMiddleware = require('webpack-dev-middleware');
-var WebpackHotMiddleware = require('webpack-hot-middleware');
-var config = require('./webpack.config');
-var compiler = webpack(config);
-
-var app = express();
+const app = express();
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,16 +27,14 @@ app.use(WebpackDevMiddleware(compiler, {
 }));
 app.use(WebpackHotMiddleware(compiler));
 
-var index = require('./server/routes/index');
-var user = require('./server/routes/user');
-var chat = require('./server/routes/chat');
-app.use(index);
-app.use(user);
-app.use(chat);
+// 服务端路由
+require('./server/config/routes').forEach(r => {
+  app.use(r);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });

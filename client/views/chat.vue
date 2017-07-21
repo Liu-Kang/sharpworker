@@ -12,7 +12,7 @@
 	import leftbox from '../components/leftbox.vue'
 	import rightbox from '../components/rightbox.vue'
   import createroom from '../components/createroom.vue'
-  import ChatModel from '../model/chat'
+  import RoomModel from '../model/room'
 
   import { mapGetters, mapActions } from 'vuex'
 
@@ -27,7 +27,7 @@
       createroom
   	},
     created() {
-      ChatModel.getRoomlist().then(data => {
+      RoomModel.getRoomlist().then(data => {
         if (data.code === 0) {
           this.setChatRooms(data.chatrooms)
         }
