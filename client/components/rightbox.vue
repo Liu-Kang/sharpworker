@@ -93,11 +93,34 @@
           const overview = document.querySelector('.room-overview')
           overview.style.height = `${viewport.clientHeight}px`
         })
+      },
+      chatlist() {
+        this.$nextTick(() => {
+        });
       }
     },
     filters: {
       avatar(sex) {
         return sex ? '../assets/boy.jpg' : '../assets/girl.jpg'
+      }
+    },
+    sockets: {
+      connect() {
+        console.log('客户端连接成功')
+      },
+      customEmit: function(val){
+        console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
+      }
+    },
+    mounted() {
+      const self = this
+      document.onkeydown = function(event) {
+        if (self.$route.name === 'chat' && event.which === 13) {
+          self.sendMyChat()   
+        }
+      }
+      this.$options.sockets.getNewChat = (data) => {
+        this.setChatList(data.chat)
       }
     },
     methods: {
@@ -115,16 +138,27 @@
           this.$message.error('输入内容不能超过500字')
           return false
         }
-        ChatModel.sendChat({
+        this.$socket.emit('sendChat', {
           content: con,
           user: this.user,
           roomid: this.roomid 
-        }).then(data => {
+        })
+        this.$options.sockets.sendChat = (data) => {
           if (data.code === 0) {
             document.querySelector('#send-chat').innerHTML = ''
             this.setChatList(data.chat)
           }
-        })
+        }
+        // ChatModel.sendChat({
+        //   content: con,
+        //   user: this.user,
+        //   roomid: this.roomid 
+        // }).then(data => {
+        //   if (data.code === 0) {
+        //     document.querySelector('#send-chat').innerHTML = ''
+        //     this.setChatList(data.chat)
+        //   }
+        // })
       }
     }
   }

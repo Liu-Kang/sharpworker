@@ -30,7 +30,7 @@
     mounted() {
       const self = this
       document.onkeyup = function(event) {
-        if (event.which === 13) {
+        if (self.$route.name === 'regist' && event.which === 13) {
           self.doRegist()
         }
       }
@@ -152,6 +152,7 @@
       position: absolute;
       bottom: -60px;
       left: 0;
+      color: #fff;
     }
   }
 </style>

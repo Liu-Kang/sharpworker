@@ -7,6 +7,9 @@ import Vuebar from 'vuebar'
 import './style/common.css'
 import './style/theme/index.css'
 import './style/scrollbar.css'
+import VueSocketio from 'vue-socket.io'
+
+Vue.use(VueSocketio, 'http://localhost:3000')
 
 Vue.use(ElementUI)
 Vue.use(Vuebar)

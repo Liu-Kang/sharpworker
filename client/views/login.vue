@@ -24,7 +24,7 @@
     mounted() {
       const self = this
       document.onkeydown = function(event) {
-        if (event.which === 13) {
+        if (self.$route.name === 'login' && event.which === 13) {
           self.doLogin()   
         }
       }

@@ -28,9 +28,17 @@ app.use(WebpackDevMiddleware(compiler, {
 app.use(WebpackHotMiddleware(compiler));
 
 // 服务端路由
-require('./server/config/routes').forEach(r => {
+const routeArr = require('./server/config/routes')
+routeArr.forEach(r => {
   app.use(r);
 });
+// 配置socket.io
+app.ready = function(server) {
+  routeArr.forEach(r => {
+    r.socketReady && r.socketReady(server);
+  });
+}
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
