@@ -61,16 +61,24 @@ class Room {
   }
 
   /**
-   * 塞入一条聊天
+   * push one data into chatlist
+   * @param {[object]} data [data.where, data.set]
+   * @return {[Promise]}
    */
   setOneChat(data) {
     return new Promise((resolved, rejected) => {
-      RoomModel.where(data.where).update({
-        $push: { chatlist: data.set }
-      }, function(err, result){
+      RoomModel.findOne(data.where, function(err, doc){
         if (err)
           throw err
-        resolved(result);
+
+        doc.chatlist.push(data.set);
+        //最多保留500条数据
+        if (doc.chatlist.length > 500) {
+          for(let i = doc.chatlist.length - 500; i > 0; i--) {
+            doc.chatlist.shift();
+          }
+        }
+        doc.save(resolved)
       });
     });
   }
