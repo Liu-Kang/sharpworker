@@ -11,7 +11,7 @@
           <i class="el-icon-arrow-down"></i>
         </div>
       </div>
-      <div class="room-content" v-bar="scrollbar">
+      <div class="room-content" v-bar="scrollbar" ref="scrollbar">
         <div class="room-overview">
           <div class="room-content-wrap">
             <ul class="room-content-list">
@@ -96,6 +96,7 @@
       },
       chatlist() {
         this.$nextTick(() => {
+          this.$vuebar.setPosition(this.$refs.scrollbar, 'bottom')
         });
       }
     },
