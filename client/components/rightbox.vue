@@ -116,12 +116,25 @@
     mounted() {
       const self = this
       document.onkeydown = function(event) {
-        if (self.$route.name === 'chat' && event.which === 13) {
-          self.sendMyChat()   
+        if (self.$route.name === 'chat') {
+          if (event.keyCode === 13 && event.ctrlKey) {
+            const newLine = document.createElement('p')
+            document.querySelector('#send-chat').appendChild(newLine)
+            return false
+          }
+          if (event.keyCode === 13) {
+            self.sendMyChat()
+          }
         }
       }
       this.$options.sockets.getNewChat = (data) => {
         this.setChatList(data.chat)
+      }
+      this.$options.sockets.sendChat = (data) => {
+        if (data.code === 0) {
+          document.querySelector('#send-chat').innerHTML = ''
+          this.setChatList(data.chat)
+        }
       }
     },
     methods: {
@@ -144,12 +157,6 @@
           user: this.user,
           roomid: this.roomid 
         })
-        this.$options.sockets.sendChat = (data) => {
-          if (data.code === 0) {
-            document.querySelector('#send-chat').innerHTML = ''
-            this.setChatList(data.chat)
-          }
-        }
         // ChatModel.sendChat({
         //   content: con,
         //   user: this.user,

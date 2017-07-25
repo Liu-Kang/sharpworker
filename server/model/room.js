@@ -78,7 +78,7 @@ class Room {
             doc.chatlist.shift();
           }
         }
-        doc.save(resolved)
+        doc.save(resolved(doc))
       });
     });
   }

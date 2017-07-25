@@ -60,12 +60,10 @@ function sendChatController(req, res, next) {
   };
 
   Room.setOneChat(data).then(result => {
-    return Room.getChatListByRoomid(data.where);
-  }).then(doc => {
     res.json({
       code: 0,
       msg: '发送成功',
-      chat: doc.chatlist.pop()
+      chat: result.chatlist.pop()
     });
   });
 }

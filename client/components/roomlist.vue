@@ -1,7 +1,7 @@
 <template>
-  <div class="chat-list">
-    <div class="chat-scope">
-      <div v-for="room in roomlist" class="chat-item" :class="{select: room.roomid === currentRoom.detail._id}" @click="enterRoom(room)">
+  <div class="room-list">
+    <div class="room-scope">
+      <div v-for="room in roomlist" class="room-item" :class="{select: room.roomid === currentRoom.detail._id}" @click="enterRoom(room)">
         <div class="info">
           <h3 class="nickname clearfix">
             <span class="fl">{{room.roomname}}</span>
@@ -38,6 +38,10 @@
         'changeCurrentRoom'
       ]),
       enterRoom(room) {
+        if (room.roomid === this.currentRoom.detail._id) {
+          return false
+        }
+
         RoomModel.getRoomDetail({
           roomid: room.roomid
         }).then(data => {
@@ -57,9 +61,9 @@
 
 <style lang="less">
   @import '../style/common.less';
-  .chat-list{
+  .room-list{
     border-top: 1px solid #292c33;
-    .chat-item{
+    .room-item{
       overflow: hidden;
       padding: 12px 18px 11px;
       border-bottom: 1px solid #292c33;
@@ -69,7 +73,7 @@
       	background-color: #34363B;
       }
     }
-    .chat-scope{
+    .room-scope{
       width: 280px;
     }
     .ext{
@@ -105,7 +109,7 @@
     .last-msg{
       color: #989898;
       font-size: 13px;
-      width: 100%;
+      width: 244px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
