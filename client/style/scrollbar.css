@@ -27,8 +27,6 @@
 }
 .vb > .vb-dragger:hover > .vb-dragger-styler {
   background-color: rgba(8, 10, 16,.4);
-  margin: 0px;
-  height: 100%;
 }
 .vb.vb-dragging-phantom > .vb-dragger > .vb-dragger-styler {
   background-color: rgba(8, 10, 16,.3);

@@ -3,7 +3,7 @@
     <el-input v-model="roomname" placeholder="请输入房间名称"></el-input>
     <h6 class="mt15">是否需要密码进入</h6>
     <div class="mt10">
-      <el-radio class="radio" v-model="isPublic" label="0">否</el-radio>
+      <el-radio class="radio" v-model="isPublic" @click="clearPwd" label="0">否</el-radio>
       <el-radio class="radio" v-model="isPublic" label="1">是</el-radio>
     </div>
     <el-input class="mt10" v-show="Number(isPublic)" v-model="password" placeholder="请输入房间密码"></el-input>
@@ -35,8 +35,12 @@
     methods: {
       ...mapActions([
         'user',
-        'showRoomApply'
+        'showRoomApply',
+        'setRoomList'
       ]),
+      clearPwd() {
+        this.password = ''
+      },
       handleClose() {
         this.roomname = ''
         this.isPublic = '0'
@@ -72,6 +76,7 @@
               message: data.msg,
               type: 'success'
             })
+            this.setRoomList(data.room)
           }
         })
       }

@@ -29,7 +29,7 @@
       <i class="search-icon"></i>
       <input class="search-input" placeholder="搜索">
     </div>
-    <div class="tab">
+    <!-- <div class="tab">
       <div class="tab-item">
         <a class="group" title="聊天室" href="javascript:;">
           <i v-if="currentTab === 'group'" class="group-icon selected"></i>
@@ -48,7 +48,7 @@
           <i v-else class="link-icon"></i>
         </a>
       </div>
-    </div>
+    </div> -->
     <div class="scroll-box" v-bar="scrollbar">
       <roomlist></roomlist>
     </div>

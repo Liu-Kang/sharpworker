@@ -22,7 +22,7 @@
                   </div>
                   <div class="chat-bubble">
                     <div class="chat-info clearfix">
-                      <span class="fl mr10">{{moment(chat.date).format('MM-DD')}}</span>
+                      <span class="fl mr10">{{moment(chat.date).format('MM-DD H:mm')}}</span>
                       <span class="fr">{{chat.user.username}}</span>
                     </div>
                     <div class="chat-text">{{chat.content}}</div>
@@ -35,7 +35,7 @@
                   <div class="chat-bubble">
                     <div class="chat-info clearfix">
                       <span class="fl mr10">{{chat.user.username}}</span>
-                      <span class="fr">{{moment(chat.date).format('MM-DD')}}</span>
+                      <span class="fr">{{moment(chat.date).format('MM-DD H:mm')}}</span>
                     </div>
                     <div class="chat-text">{{chat.content}}</div>
                   </div>

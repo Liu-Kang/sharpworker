@@ -10,13 +10,20 @@ router.get('/api/getRoomDetail', getRoomDetailController)
 function createRoomController(req, res, next) {
   let data = req.body;
   let md5 = crypto.createHash('md5');
-  let password_md5 = md5.update(data.password).digest('hex');
-  data.password = password_md5;
+  if (data.password) {
+    let password_md5 = md5.update(data.password).digest('hex');
+    data.password = password_md5;
+  }
   
   Room.createChatRoom(data).then(result => {
     res.json({
       code: 0,
-      msg: '创建成功'
+      msg: '创建成功',
+      room: {
+        roomid: result._id,
+        roomname: result.roomname,
+        lastchat: result.chatlist.pop()
+      }
     });
   });
 }
