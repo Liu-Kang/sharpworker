@@ -15,7 +15,7 @@
         <div class="room-overview">
           <div class="room-content-wrap">
             <ul class="room-content-list">
-              <li v-if="chatlist.length > 0" v-for="chat in chatlist" class="chat-item clearfix">
+              <li v-if="chatlist.length > 0" v-for="(chat, $index) in chatlist" class="chat-item clearfix" @mouseenter="showOp = $index" @mouseleave="showOp = -1">
                 <div v-if="chat.user.username === user.username" class="chat-item-right">
                   <div class="chat-user">
                     <img :src="chat.user.sex | avatar">
@@ -26,6 +26,9 @@
                       <span class="fr">{{chat.user.username}}</span>
                     </div>
                     <div class="chat-text">{{chat.content}}</div>
+                  </div>
+                  <div class="chat-op" v-show="showOp === $index">
+                    <i class="el-icon-delete2" title="撤回"></i>
                   </div>
                 </div>
                 <div v-else class="chat-item-left">
@@ -38,6 +41,9 @@
                       <span class="fr">{{moment(chat.date).format('MM-DD H:mm')}}</span>
                     </div>
                     <div class="chat-text">{{chat.content}}</div>
+                  </div>
+                  <div class="chat-op" v-show="showOp === $index">
+                    <i class="el-icon-delete2" title="撤回"></i>
                   </div>
                 </div>
               </li>
@@ -71,7 +77,8 @@
         scrollbar: {
           preventParentScroll: true,
           scrollThrottle: 30
-        }
+        },
+        showOp: -1
       }
     },
     computed: {
@@ -269,6 +276,11 @@
           cursor: pointer;
         }
       }
+      .chat-op{
+        color: #999;
+        cursor: pointer;
+        float: left;
+      }
       .chat-item-left{
         .chat-bubble{
           &:after{
@@ -289,6 +301,9 @@
           }
         }
         .chat-user{
+          float: right;
+        }
+        .chat-op{
           float: right;
         }
       }
