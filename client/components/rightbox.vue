@@ -28,7 +28,7 @@
                     <div class="chat-text">{{chat.content}}</div>
                   </div>
                   <div class="chat-op" v-show="showOp === $index">
-                    <i class="el-icon-delete2" title="撤回"></i>
+                    <i class="el-icon-delete2" @click="deleteConfirm(chat._id)" title="撤回"></i>
                   </div>
                 </div>
                 <div v-else class="chat-item-left">
@@ -41,9 +41,6 @@
                       <span class="fr">{{moment(chat.date).format('MM-DD H:mm')}}</span>
                     </div>
                     <div class="chat-text">{{chat.content}}</div>
-                  </div>
-                  <div class="chat-op" v-show="showOp === $index">
-                    <i class="el-icon-delete2" title="撤回"></i>
                   </div>
                 </div>
               </li>
@@ -121,6 +118,8 @@
       }
     },
     mounted() {
+      this.socketBroadcast()
+
       const self = this
       document.onkeydown = function(event) {
         if (self.$route.name === 'chat') {
@@ -134,20 +133,33 @@
           }
         }
       }
-      this.$options.sockets.getNewChat = (data) => {
-        this.setChatList(data.chat)
-      }
-      this.$options.sockets.sendChat = (data) => {
-        if (data.code === 0) {
-          document.querySelector('#send-chat').innerHTML = ''
-          this.setChatList(data.chat)
-        }
-      }
     },
     methods: {
       ...mapActions([
-        'setChatList'
+        'setChatList',
+        'removeOneChat'
       ]),
+      socketBroadcast() {
+        this.$options.sockets.getNewChat = (data) => {
+          this.setChatList(data.chat)
+        }
+        this.$options.sockets.sendChat = (data) => {
+          if (data.code === 0) {
+            document.querySelector('#send-chat').innerHTML = ''
+            this.setChatList(data.chat)
+          }
+        }
+        this.$options.sockets.getRemoveOne = (data) => {
+          if (data.roomid === this.roomid) {
+            this.removeOneChat(data.chatid)
+          }
+        }
+        this.$options.sockets.removeOneChat = (data) => {
+          if (data.code === 0) {
+            this.removeOneChat(data.chatid)
+          }
+        }
+      },
       sendMyChat() {
         const con = document.querySelector('#send-chat').innerHTML.trim()
 
@@ -164,16 +176,14 @@
           user: this.user,
           roomid: this.roomid 
         })
-        // ChatModel.sendChat({
-        //   content: con,
-        //   user: this.user,
-        //   roomid: this.roomid 
-        // }).then(data => {
-        //   if (data.code === 0) {
-        //     document.querySelector('#send-chat').innerHTML = ''
-        //     this.setChatList(data.chat)
-        //   }
-        // })
+      },
+      deleteConfirm(chatid) {
+        this.$confirm('确认删除这条消息吗？').then(() => {
+          this.$socket.emit('removeOneChat', {
+            roomid: this.roomid,
+            chatid: chatid
+          })
+        })
       }
     }
   }

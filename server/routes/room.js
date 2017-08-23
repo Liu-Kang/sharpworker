@@ -15,6 +15,9 @@ function createRoomController(req, res, next) {
     data.password = password_md5;
   }
   
+  /**
+   * 创建房间
+   */
   Room.createChatRoom(data).then(result => {
     res.json({
       code: 0,
@@ -28,6 +31,9 @@ function createRoomController(req, res, next) {
   });
 }
 
+/**
+ * 获取房间列表
+ */
 function getRoomListController(req, res, next) {
   Room.getAllRooms().then(doc => {
     let chatlist = [];
@@ -52,6 +58,9 @@ function getRoomListController(req, res, next) {
   });
 }
 
+/**
+ * 获取房间详情
+ */
 function getRoomDetailController(req, res, next) {
   const data = req.query
   const query = {}

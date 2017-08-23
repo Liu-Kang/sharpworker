@@ -18,6 +18,18 @@ export default {
 		},
 		SET_ROOM_LIST(state, data) {
 			state.roomlist.unshift(data)
+		},
+		REMOVE_ONE_CHAT(state, data) {
+			const list = state.currentRoom.detail.chatlist
+			let index = -1
+			list.forEach((v, k) => {
+				if (v._id === data) {
+					index = k
+				}
+			})
+			if (index >= 0) {
+				state.currentRoom.detail.chatlist.splice(index, 1)
+			}
 		}
 	},
 	actions: {
@@ -33,9 +45,13 @@ export default {
 		setChatList({ commit }, data) {
 			commit('SET_CHAT_LIST', data)
 		},
-		//塞入一个房间
+		// 塞入一个房间
 		setRoomList({ commit }, data) {
 			commit('SET_ROOM_LIST', data)
+		},
+		// 删除一条聊天
+		removeOneChat({ commit }, data) {
+			commit('REMOVE_ONE_CHAT', data)
 		}
 	},
 	getters:{

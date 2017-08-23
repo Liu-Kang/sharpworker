@@ -95,6 +95,19 @@ class Room {
       });
     });
   }
+  /**
+   * 删除一条聊天
+   * @return {[promise]} [description]
+   */
+  removeOneChat(query) {
+    return new Promise((resolved, rejected) => {
+      RoomModel.update({_id: query.roomid}, {$pull: {chatlist: {_id: query.chatid}}}, function(err){
+        if (err)
+          throw err
+        resolved();
+      });
+    });
+  }
 }
 
 module.exports = new Room();

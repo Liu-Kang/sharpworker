@@ -36,7 +36,20 @@ router.socketReady = function(server) {
           chat: chat
         });
       });
-    })
+    });
+
+    // 删除一条消息
+    socket.on('removeOneChat', param => {
+      Room.removeOneChat(param).then(() => {
+        socket.emit('removeOneChat', {
+          code: 0,
+          msg: '删除成功',
+          chatid: param.chatid,
+          roomid: param.roomid
+        });
+        socket.broadcast.emit('getRemoveOne', param);
+      });
+    });
   });
 }
 
