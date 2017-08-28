@@ -27,7 +27,7 @@
       createroom
     },
     created() {
-      RoomModel.getRoomlist().then(data => {
+      RoomModel.getRoomList().then(data => {
         if (data.code === 0) {
           this.setChatRooms(data.chatrooms)
         }

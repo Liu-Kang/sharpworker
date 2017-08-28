@@ -5,9 +5,10 @@ const crypto = require('crypto');
 
 router.post('/api/createRoom', createRoomController);
 router.get('/api/getRoomList', getRoomListController);
-router.get('/api/getRoomDetail', getRoomDetailController)
+router.get('/api/getRoomDetail', getRoomDetailController);
+router.post('/api/checkRoomPassword', checkRoomPasswordController);
 
-function createRoomController(req, res, next) {
+function createRoomController(req, res) {
   let data = req.body;
   let md5 = crypto.createHash('md5');
   if (data.password) {
@@ -34,14 +35,16 @@ function createRoomController(req, res, next) {
 /**
  * 获取房间列表
  */
-function getRoomListController(req, res, next) {
+function getRoomListController(req, res) {
   Room.getAllRooms().then(doc => {
     let chatlist = [];
     doc.forEach(v => {
       chatlist.push({
         roomid: v._id,
         roomname: v.roomname,
-        lastchat: v.chatlist.pop()
+        lastchat: v.chatlist.pop(),
+        password: v.password ? true : false,
+        creator: v.creator
       });
     });
 
@@ -61,14 +64,14 @@ function getRoomListController(req, res, next) {
 /**
  * 获取房间详情
  */
-function getRoomDetailController(req, res, next) {
-  const data = req.query
-  const query = {}
+function getRoomDetailController(req, res) {
+  const data = req.query;
+  const query = {};
   if (data.roomid) {
-    query._id = data.roomid
+    query._id = data.roomid;
   }
   if (data.roomname) {
-    query.roomname = data.roomname
+    query.roomname = data.roomname;
   }
   Room.getRoomDetail(query).then(doc => {
     let result = doc.toObject();
@@ -79,6 +82,35 @@ function getRoomDetailController(req, res, next) {
       msg: '获取成功',
       room: result
     });
+  });
+}
+
+/**
+ * 验证房间密码
+ */
+function checkRoomPasswordController(req, res) {
+  const data = req.body;
+  const md5 = crypto.createHash('md5');
+  const password_md5 = md5.update(data.password).digest('hex');
+  const query = {
+    _id: data.roomid
+  };
+
+  Room.getRoomDetail(query).then(doc => {
+    const pwd = doc.password;
+    let cb = {}
+    if (password_md5 === pwd) {
+      cb = {
+        code: 0,
+        msg: '验证通过'
+      }
+    } else {
+      cb = {
+        code: -1,
+        msg: '房间口令输入错误'
+      }
+    }
+    res.json(cb);
   });
 }
 

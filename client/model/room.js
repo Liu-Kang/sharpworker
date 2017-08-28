@@ -14,7 +14,7 @@ class RoomModel extends Fetch {
   /**
    * 获取房间列表
    */
-  getRoomlist() {
+  getRoomList() {
     return this.send({
       url: '/api/getRoomList',
       method: 'GET'
@@ -27,6 +27,15 @@ class RoomModel extends Fetch {
     return this.send({
       url: '/api/getRoomDetail',
       method: 'GET',
+      params
+    })
+  }
+  /**
+   * 验证房间口令
+   */
+  checkRoomPassword(params) {
+    return this.send({
+      url: '/api/checkRoomPassword',
       params
     })
   }

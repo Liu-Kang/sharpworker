@@ -53,7 +53,7 @@ router.socketReady = function(server) {
   });
 }
 
-function sendChatController(req, res, next) {
+function sendChatController(req, res) {
   let param = req.body;
   if (!param.content) {
     return res.json({

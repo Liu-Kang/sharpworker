@@ -29,6 +29,7 @@
     },
     computed: {
       ...mapGetters([
+        'user',
         'roomlist',
         'currentRoom'
       ])
@@ -42,18 +43,48 @@
           return false
         }
 
-        RoomModel.getRoomDetail({
-          roomid: room.roomid
-        }).then(data => {
-          if (data.code === 0) {
-            this.changeCurrentRoom({
-              type: 'public',
-              detail: data.room
-            })
-          } else {
-            this.$message.error(data.msg)
-          }
-        })
+        const self = this
+
+        var getRoom = function() {
+          RoomModel.getRoomDetail({
+            roomid: room.roomid
+          }).then(data => {
+            if (data.code === 0) {
+              self.changeCurrentRoom({
+                type: 'public',
+                detail: data.room
+              })
+            } else {
+              self.$message.error(data.msg)
+            }
+          })
+        }
+
+        if (room.password && self.user.userid !== room.creator) {
+          self.$prompt('请输入房间口令', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            beforeClose: (action, instance, done) => {
+              if (action === 'confirm') {
+                RoomModel.checkRoomPassword({
+                  roomid: room.roomid,
+                  password: instance.$refs.input.value
+                }).then(data => {
+                  if (data.code === 0) {
+                    getRoom()
+                    done()
+                  } else {
+                    self.$message.error(data.msg)
+                  }
+                })
+              } else {
+                done()
+              }
+            }
+          })
+        } else {
+          getRoom()
+        }
       }
     }
   }
