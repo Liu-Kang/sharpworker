@@ -18,22 +18,22 @@
     created() {
       UserModel.getIndex().then(data => {
         if (data.code === 0) {
-            if (data.user) {
-              this.setUser(data.user)
-              this.$router.push({name: 'chat'})
-            } else {
-              this.$router.push({name: 'login'})
-            }
+          if (data.user) {
+            this.setUser(data.user)
+            this.$router.push({name: 'chat'})
+          } else {
+            this.$router.push({name: 'login'})
+          }
         } else {
-            this.$message.error(data.msg)
+          this.$message.error(data.msg)
         }
       })
     },
     methods: {
       ...mapActions([
-        'setUser'
+        'setUser',
       ]),
-    }
+    },
   }
 </script>
 

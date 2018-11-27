@@ -93,7 +93,16 @@
         return this.currentRoom.detail._id
       },
       chatlist() {
-        return this.currentRoom.detail.chatlist
+        const arr = this.currentRoom.detail.chatlist
+        arr.forEach((item, index) => {
+          if (!item) {
+            arr.splice(index, 1)
+          }
+        });
+        this.$nextTick(() => {
+          this.$vuebar.setPosition(this.$refs.scrollbar, 'bottom')
+        })
+        return arr
       },
     },
     watch: {
@@ -104,11 +113,11 @@
           overview.style.height = `${viewport.clientHeight}px`
         })
       },
-      chatlist() {
-        this.$nextTick(() => {
-          this.$vuebar.setPosition(this.$refs.scrollbar, 'bottom')
-        })
-      },
+      // chatlist() {
+      //   this.$nextTick(() => {
+      //     this.$vuebar.setPosition(this.$refs.scrollbar, 'bottom')
+      //   })
+      // },
     },
     filters: {
       avatar(sex) {
@@ -168,7 +177,6 @@
       },
       sendMyChat() {
         const con = document.querySelector('#send-chat').innerHTML.trim()
-        alert(con);
         if (!con) {
           this.$message.error('请输入内容')
           return false
@@ -211,7 +219,7 @@
       .empty-icon{
         width: 120px;
         height: 98px;
-        .icon(-150px,0);
+        .icon(-150px, 0);
         margin: 200px auto;
       }
     }

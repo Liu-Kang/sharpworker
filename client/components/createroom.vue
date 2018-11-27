@@ -23,20 +23,19 @@
       return {
         roomname: '',
         isPublic: '0',
-        password: ''
+        password: '',
       }
     },
     computed: {
       ...mapGetters([
         'user',
-        'createRoomApply'
+        'createRoomApply',
       ])
     },
     methods: {
       ...mapActions([
-        'user',
         'showRoomApply',
-        'setRoomList'
+        'setRoomList',
       ]),
       clearPwd() {
         this.password = ''
@@ -51,7 +50,7 @@
         if (!this.roomname) {
           this.$message({
             message: '请输入房间名称',
-            type: 'warning'
+            type: 'warning',
           })
           return false
         }
@@ -59,7 +58,7 @@
         if (this.isPublic === '1' && !this.password) {
           this.$message({
             message: '请输入房间密码',
-            type: 'warning'
+            type: 'warning',
           })
           return false
         }
@@ -74,13 +73,13 @@
             this.handleClose()
             this.$message({
               message: data.msg,
-              type: 'success'
+              type: 'success',
             })
             this.setRoomList(data.room)
           }
         })
-      }
-    }
+      },
+    },
   }
 </script>
 <style lang="less">

@@ -8,41 +8,36 @@
  * http://router.vuejs.org/en/index.html
  */
 
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-
-Vue.use(VueRouter);
-
-import store from '@/store';
-
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import store from '@/store'
 import login from '@/views/login.vue'
 import regist from '@/views/regist.vue'
 import chat from '@/views/chat.vue'
 
+Vue.use(VueRouter);
 const routes = [
 	{
     path: '/chat',
     name: 'chat',
-    component: chat
+    component: chat,
   },
 	{
     path: '/login',
     name: 'login',
-    component: login
+    component: login,
   },
 	{
     path: '/regist',
     name: 'regist',
-    component: regist
-  }
+    component: regist,
+  },
 ]
-
 const router = new VueRouter({
   // mode: 'history',
   // base: '/static',
   routes,
 });
-
 router.beforeEach((to, from, next) => {
   const matched = router.getMatchedComponents(to); // 是否有匹配组件
   // 配置404页面
@@ -72,5 +67,4 @@ router.beforeEach((to, from, next) => {
     });
   }
 });
-
 export default router;

@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="search-bar">
-      <i class="search-icon"></i>
+      <i class="el-icon-search"></i>
       <input class="search-input" placeholder="搜索">
     </div>
     <!-- <div class="tab">

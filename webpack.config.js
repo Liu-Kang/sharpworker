@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -12,12 +13,21 @@ module.exports = {
     './client/main.js'
   ],
   output: {
-    path: '/',
+    path: path.resolve(__dirname, '/'),
     publicPath: 'http://127.0.0.1:3000/client/dist/',
     filename: 'build.js'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   template: 'index.html',
+    //   inject: true,
+    //   commonFile: 'client/dist/build.js', 
+    //   inject: true,
+    //   shortcut: 'client/assets/boy.jpg',
+    //   chunksSortMode: 'dependency'
+    // }),
   ],
   module: {
     rules: [

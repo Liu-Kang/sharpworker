@@ -11,6 +11,12 @@ const WebpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config');
 const compiler = webpack(config);
 
+const devMiddleware = require('webpack-dev-middleware')(compiler, {
+  publicPath: config.output.publicPath,
+  stats: { colors: true }
+});
+const hotMiddleware = require('webpack-hot-middleware')(compiler);
+
 const app = express();
 
 // uncomment after placing your favicon in /public
@@ -21,11 +27,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
 
-app.use(WebpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath,
-  stats: { colors: true }
-}));
-app.use(WebpackHotMiddleware(compiler));
+app.use(devMiddleware);
+app.use(hotMiddleware);
+
+compiler.plugin('compilation', function (compilation) {
+  compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+    hotMiddleware.publish({ action: 'reload' })
+    cb()
+  })
+})
 
 // 服务端路由
 const routeArr = require('./server/config/routes')

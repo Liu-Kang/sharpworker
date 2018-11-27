@@ -24,11 +24,11 @@ class Room {
    * 创建房间
    */
   createChatRoom(data) {
-    return new Promise((resolved, rejected) => {
+    return new Promise((resolved) => {
       const roomEntity = new RoomModel(data);
       roomEntity.save(function(err, result){
         if (err)
-          throw err
+          throw err;
         resolved(result);
       });
     });
@@ -38,10 +38,10 @@ class Room {
    * 获取全部房间
    */
   getAllRooms() {
-    return new Promise((resolved, rejected) => {
+    return new Promise((resolved) => {
       RoomModel.find(function(err, doc){
         if (err)
-          throw err
+          throw err;
         resolved(doc);
       });
     });
@@ -51,10 +51,10 @@ class Room {
    * 获取单个房间详情
    */
   getRoomDetail(query) {
-    return new Promise((resolved, rejected) => {
+    return new Promise((resolved) => {
       RoomModel.findOne(query, function(err, doc){
         if (err)
-          throw err
+          throw err;
         resolved(doc);
       });
     });
@@ -66,18 +66,14 @@ class Room {
    * @return {[Promise]}
    */
   setOneChat(data) {
-    return new Promise((resolved, rejected) => {
-      RoomModel.findOne(data.where, function(err, doc){
-        if (err)
-          throw err
-        doc.chatlist.push(data.set);
-        //最多保留500条数据
-        if (doc.chatlist.length > 500) {
-          for(let i = doc.chatlist.length - 500; i > 0; i--) {
-            doc.chatlist.shift();
-          }
+    return new Promise((resolved) => {
+      RoomModel.update(data.where, {
+        $push: {
+          chatlist: data.set,
         }
-        doc.save();
+      }, function(err, data){
+        if (err)
+          throw err;
         resolved();
       });
     });
@@ -87,10 +83,10 @@ class Room {
    * 获取聊天列表
    */
   getChatListByRoomid(query) {
-    return new Promise((resolved, rejected) => {
+    return new Promise((resolved) => {
       RoomModel.findOne(query, 'chatlist', function(err, doc){
         if (err)
-          throw err
+          throw err;
         resolved(doc);
       });
     });
@@ -100,10 +96,16 @@ class Room {
    * @return {[promise]} [description]
    */
   removeOneChat(query) {
-    return new Promise((resolved, rejected) => {
-      RoomModel.update({_id: query.roomid}, {$pull: {chatlist: {_id: query.chatid}}}, function(err){
+    return new Promise((resolved) => {
+      RoomModel.update({_id: query.roomid}, {
+        $pull: {
+          chatlist: {
+            _id: query.chatid
+          }
+        }
+      }, function(err){
         if (err)
-          throw err
+          throw err;
         resolved();
       });
     });
