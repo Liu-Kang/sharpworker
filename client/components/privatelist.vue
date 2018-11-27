@@ -1,7 +1,7 @@
 <template>
   <div class="chat-list">
     <div class="chat-scope">
-      <div v-for="chat in chats" class="chat-item slide-left ng-scope">
+      <div v-for="(chat, index) in chats" class="chat-item slide-left" :key="index">
         <div class="ext">
           <p class="ext-time">{{chat.time}}</p>
         </div>

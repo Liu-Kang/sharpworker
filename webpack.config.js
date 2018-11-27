@@ -1,6 +1,10 @@
 var path = require('path')
 var webpack = require('webpack')
 
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
   entry: [
     'webpack/hot/dev-server',
@@ -9,7 +13,7 @@ module.exports = {
   ],
   output: {
     path: '/',
-    publicPath: 'http://localhost:3000/client/dist/',
+    publicPath: 'http://127.0.0.1:3000/client/dist/',
     filename: 'build.js'
   },
   plugins: [
@@ -17,6 +21,15 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('client')],
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -50,6 +63,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      '@': resolve('client'),
       'vue$': 'vue/dist/vue.esm.js'
     }
   },

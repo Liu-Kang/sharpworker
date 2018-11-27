@@ -70,7 +70,6 @@ class Room {
       RoomModel.findOne(data.where, function(err, doc){
         if (err)
           throw err
-
         doc.chatlist.push(data.set);
         //最多保留500条数据
         if (doc.chatlist.length > 500) {
@@ -78,7 +77,8 @@ class Room {
             doc.chatlist.shift();
           }
         }
-        doc.save(resolved(doc))
+        doc.save();
+        resolved();
       });
     });
   }

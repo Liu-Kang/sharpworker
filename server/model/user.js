@@ -13,6 +13,7 @@ class User {
 	 */
 	createUser(data) {
 		return new Promise((resolved, rejected) => {
+      console.log('================\n', data);
 			const userEntity = new UserModel(data);
 			userEntity.save(function(err, result){
 				if (err)

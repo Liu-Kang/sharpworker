@@ -15,7 +15,13 @@
         <div class="room-overview">
           <div class="room-content-wrap">
             <ul class="room-content-list">
-              <li v-if="chatlist.length > 0" v-for="(chat, $index) in chatlist" class="chat-item clearfix" @mouseenter="showOp = $index" @mouseleave="showOp = -1">
+              <li
+                v-if="chatlist.length > 0"
+                v-for="(chat, index) in chatlist"
+                class="chat-item clearfix"
+                @mouseenter="showOp = $index"
+                @mouseleave="showOp = -1"
+                :key="index">
                 <div v-if="chat.user.username === user.username" class="chat-item-right">
                   <div class="chat-user">
                     <img :src="chat.user.sex | avatar">
@@ -162,7 +168,7 @@
       },
       sendMyChat() {
         const con = document.querySelector('#send-chat').innerHTML.trim()
-
+        alert(con);
         if (!con) {
           this.$message.error('请输入内容')
           return false

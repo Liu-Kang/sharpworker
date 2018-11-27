@@ -23,7 +23,7 @@ router.socketReady = function(server) {
         }
       };
 
-      Room.setOneChat(data).then(result => {
+      Room.setOneChat(data).then(() => {
         return Room.getChatListByRoomid(data.where);
       }).then(doc => {
         let chat = doc.chatlist.pop()
