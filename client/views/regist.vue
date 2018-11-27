@@ -24,7 +24,7 @@
         username: '',
         password: '',
         repassword: '',
-        sex: '1'
+        sex: '1',
       }
     },
     mounted() {
@@ -37,45 +37,45 @@
     },
     methods: {
       doRegist() {
-        if(!this.username){
+        if (!this.username) {
           this.$message({
             message: '请输入用户名',
-            type: 'warning'
+            type: 'warning',
           })
           return false
         }
-        if(!this.password){
+        if (!this.password) {
           this.$message({
             message: '请输入密码',
-            type: 'warning'
+            type: 'warning',
           })
           return false
         }
-        if(this.password.length < 6){
+        if (this.password.length < 6) {
           this.$message({
             message: '密码长度至少6位',
-            type: 'warning'
+            type: 'warning',
           })
           return false
         }
-        if(!this.repassword){
+        if (!this.repassword) {
           this.$message({
             message: '请输入确认密码',
-            type: 'warning'
+            type: 'warning',
           })
           return false
         }
-        if(this.repassword !== this.password){
+        if (this.repassword !== this.password) {
           this.$message({
             message: '两次密码输入不一致',
-            type: 'warning'
+            type: 'warning',
           })
           return false
         }
-        if(!this.sex){
+        if (!this.sex) {
           this.$message({
             message: '请选择性别',
-            type: 'warning'
+            type: 'warning',
           })
           return false
         }
@@ -85,7 +85,7 @@
           sex: this.sex
         }
         let self = this
-        UserModel.doRegist(params).then(data => {
+        UserModel.doRegist(params).then((data) => {
           if (data.code === 0) {
             self.$router.push({name: 'login'})
             // self.$store.user.user.name = params.name
@@ -93,8 +93,8 @@
             self.$message.error(data.msg)
           }
         })
-      }
-    }
+      },
+    },
   }
 </script>
 

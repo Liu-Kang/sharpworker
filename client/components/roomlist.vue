@@ -1,7 +1,12 @@
 <template>
   <div class="room-list">
     <div class="room-scope">
-      <div v-for="room in roomlist" class="room-item" :class="{select: room.roomid === currentRoom.detail._id}" @click="enterRoom(room)">
+      <div
+        v-for="(room, index) in roomlist"
+        class="room-item"
+        :class="{select: room.roomid === currentRoom.detail._id}"
+        @click="enterRoom(room)"
+        :key="index">
         <div class="info">
           <h3 class="nickname clearfix">
             <span class="fl">{{room.roomname}}</span>
@@ -24,35 +29,35 @@
   export default {
     data() {
       return {
-      	moment: moment
+        moment,
       }
     },
     computed: {
       ...mapGetters([
         'user',
         'roomlist',
-        'currentRoom'
-      ])
+        'currentRoom',
+      ]),
     },
     methods: {
       ...mapActions([
-        'changeCurrentRoom'
+        'changeCurrentRoom',
       ]),
       enterRoom(room) {
-        if (room.roomid === this.currentRoom.detail._id) {
+        if (room.roomid === this.currentRoom.detail['_id']) {
           return false
         }
 
         const self = this
 
-        var getRoom = function() {
+        const getRoom = () => {
           RoomModel.getRoomDetail({
-            roomid: room.roomid
+            roomid: room.roomid,
           }).then(data => {
             if (data.code === 0) {
               self.changeCurrentRoom({
                 type: 'public',
-                detail: data.room
+                detail: data.room,
               })
             } else {
               self.$message.error(data.msg)
@@ -68,8 +73,8 @@
               if (action === 'confirm') {
                 RoomModel.checkRoomPassword({
                   roomid: room.roomid,
-                  password: instance.$refs.input.value
-                }).then(data => {
+                  password: instance.$refs.input.value,
+                }).then((data) => {
                   if (data.code === 0) {
                     getRoom()
                     done()
@@ -80,13 +85,13 @@
               } else {
                 done()
               }
-            }
+            },
           })
         } else {
           getRoom()
         }
-      }
-    }
+      },
+    },
   }
 </script>
 

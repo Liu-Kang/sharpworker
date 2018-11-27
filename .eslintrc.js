@@ -29,7 +29,7 @@ module.exports = {
     'no-console': 0,
     'no-param-reassign': 0,
     'no-multi-assign': 0,
-
+    'semi': [2, 'never'],
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       'js': 'never',

@@ -79,22 +79,22 @@
         moment: moment,
         scrollbar: {
           preventParentScroll: true,
-          scrollThrottle: 30
+          scrollThrottle: 30,
         },
-        showOp: -1
+        showOp: -1,
       }
     },
     computed: {
       ...mapGetters([
         'user',
-        'currentRoom'
+        'currentRoom',
       ]),
       roomid() {
         return this.currentRoom.detail._id
       },
       chatlist() {
         return this.currentRoom.detail.chatlist
-      }
+      },
     },
     watch: {
       roomid() {
@@ -107,13 +107,13 @@
       chatlist() {
         this.$nextTick(() => {
           this.$vuebar.setPosition(this.$refs.scrollbar, 'bottom')
-        });
-      }
+        })
+      },
     },
     filters: {
       avatar(sex) {
         return sex ? '../assets/boy.jpg' : '../assets/girl.jpg'
-      }
+      },
     },
     sockets: {
       connect() {
@@ -180,18 +180,18 @@
         this.$socket.emit('sendChat', {
           content: con,
           user: this.user,
-          roomid: this.roomid 
+          roomid: this.roomid,
         })
       },
       deleteConfirm(chatid) {
         this.$confirm('确认删除这条消息吗？').then(() => {
           this.$socket.emit('removeOneChat', {
             roomid: this.roomid,
-            chatid: chatid
+            chatid,
           })
         })
-      }
-    }
+      },
+    },
   }
 </script>
 

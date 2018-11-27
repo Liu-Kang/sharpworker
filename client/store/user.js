@@ -1,19 +1,19 @@
 export default {
-	state:{
-		user:{
+  state: {
+		user: {
 			userid: '',
-			username:'',
-			sex: ''
+			username: '',
+			sex: '',
 		},
-		createRoomApply: false
+		createRoomApply: false,
 	},
-	mutations:{
+	mutations: {
 		SET_USER(state, data) {
 			state.user = data
 		},
 		CREATE_ROOM_APPLY(state, bool) {
 			state.createRoomApply = bool
-		}
+		},
 	},
 	actions: {
 		setUser({ commit }, data) {
@@ -21,11 +21,11 @@ export default {
 		},
 		showRoomApply({ commit }, bool) {
 			commit('CREATE_ROOM_APPLY', bool)
-		}
+		},
 	},
-	getters:{
+	getters: {
 		user: state => state.user,
-		isLogin : state => state.user.id ? true : false,
-		createRoomApply: state => state.createRoomApply
-	}
+		isLogin: state => state.user.id ? true : false,
+		createRoomApply: state => state.createRoomApply,
+	},
 }

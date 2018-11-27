@@ -8,7 +8,7 @@ class ChatModel extends Fetch {
   sendChat(params) {
     return this.send({
       url: '/api/sendChat',
-      params
+      params,
     })
   }
 }

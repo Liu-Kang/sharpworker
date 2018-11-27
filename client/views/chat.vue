@@ -24,7 +24,7 @@
     components:{
       leftbox,
       rightbox,
-      createroom
+      createroom,
     },
     created() {
       RoomModel.getRoomList().then(data => {
@@ -35,9 +35,9 @@
     },
     methods: {
       ...mapActions([
-        'setChatRooms'
-      ])
-    }
+        'setChatRooms',
+      ]),
+    },
   }
 </script>
 

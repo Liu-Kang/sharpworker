@@ -1,11 +1,11 @@
 export default {
-	state: {
+  state: {
 		roomlist: [],
 		currentRoom: {
 			type: 'empty', // public / private / empty
-			detail: {}
-		}
-	},
+			detail: {},
+    },
+  },
 	mutations: {
 		SET_CHAT_ROOMS(state, data) {
 			state.roomlist = data
@@ -18,7 +18,7 @@ export default {
 		},
 		SET_ROOM_LIST(state, data) {
 			state.roomlist.unshift(data)
-		},
+    },
 		REMOVE_ONE_CHAT(state, data) {
 			const list = state.currentRoom.detail.chatlist
 			let index = -1
@@ -52,10 +52,10 @@ export default {
 		// 删除一条聊天
 		removeOneChat({ commit }, data) {
 			commit('REMOVE_ONE_CHAT', data)
-		}
+		},
 	},
 	getters:{
 		roomlist: state => state.roomlist,
-		currentRoom: state => state.currentRoom
-	}
+		currentRoom: state => state.currentRoom,
+	},
 }

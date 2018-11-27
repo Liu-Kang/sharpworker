@@ -26,16 +26,16 @@
           {
             name: 'SaySomeThing',
             lastmsg: 'Tony:凑个单',
-            time: '17:04'
+            time: '17:04',
           },
           {
             name: '相亲相爱',
             lastmsg: 'Liuk:什么时候回去',
-            time: '17:20'
-          }
-        ]
+            time: '17:20',
+          },
+        ],
       }
-    }
+    },
   }
 </script>
 
